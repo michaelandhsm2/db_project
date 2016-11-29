@@ -1,6 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/*Google Fonts*/
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css); //font-family: 'Noto Sans TC', sans-serif;
 
 /* mixins, variables, etc. */
 
@@ -10,6 +12,7 @@ $gray-medium-light: #eaeaea;
 
 body {
   padding-top: 60px;
+  font-family: 'Noto Sans TC', sans-serif;
 }
 
 section {
@@ -96,4 +99,20 @@ footer {
       margin-left: 15px;
     }
   }
+}
+
+/* Table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
