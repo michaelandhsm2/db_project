@@ -16,25 +16,27 @@ Rails.application.routes.draw do
     #resources :orders, only: [:index]
   end
 
-=begin
-  resource :orders, only: [:show]
+  #resource :orders, only: [:show]
 
-  get '/cart', to: 'orders#edit'
+  #get '/cart', to: 'orders#edit'
 
-  post '/cart', to: 'orders#update'
+  #post '/cart', to: 'orders#update'
 
-  resources :stores, only: [:index, :show]
+  resources :stores, only: [:index, :show, :new, :create]
 
-  resources :items, only: [:index, :show]
+  #resources :items, only: [:index, :show]
 
 
   namespace :owner do
     resources :stores, except: [:index, :show, :new, :create] do
-      resources :items, except: [:index, :show], shallow: true
-      resources :events, shallow: true
+      #resources :items, except: [:index, :show], shallow: true
+      #resources :events, shallow: true
     end
   end
 
+  #resources :items, only: [:index, :show]
+
+=begin
   namespace :admin do
     resources :tags
     resources :users, only: [:index]
