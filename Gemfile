@@ -7,6 +7,7 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'bootstrap-sass', '>= 3.3.7'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '3.1.11'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
