@@ -6,7 +6,7 @@ class StoresController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @store = Store.new
   end
 
   def create
