@@ -1,0 +1,23 @@
+<%= form_for(store) do |f| %>
+  <%= render 'shared/error_messages', item: store %>
+
+  <%= f.label :name, "店名" %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :address, "地址" %>
+  <%= f.text_field :address, class: 'form-control' %>
+
+  <%= f.label :email, "電子信箱" %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+  <%= f.label :phone, "聯絡電話 (可不填)" %>
+  <%= f.text_field :phone, class: 'form-control' %>
+
+  <%= f.label :description, "詳細介紹 (可不填)" %>
+  <%= f.text_area :description, size: "60x8", class: 'form-control' %>
+
+  <%= f.label :image, "店舖照片"  %>
+  <%= f.file_field :image, class: 'form-control'  %>
+
+  <%= f.submit "確認送出", class: "btn btn-primary" %>
+<% end %>
