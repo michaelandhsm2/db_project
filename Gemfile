@@ -8,6 +8,8 @@ gem 'bootstrap-sass', '>= 3.3.7'
 gem 'autoprefixer-rails'
 gem 'bcrypt', '3.1.11'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'mini_magick'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'

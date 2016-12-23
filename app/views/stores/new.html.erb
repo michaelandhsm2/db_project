@@ -19,6 +19,9 @@
       <%= f.label :phone, "聯絡電話 (可不填)" %>
       <%= f.text_field :phone, class: 'form-control' %>
 
+      <%= f.label :image, "店舖照片"  %>
+      <%= f.file_field :image, class: 'form-control'  %>
+
       <%= f.submit "確認送出", class: "btn btn-primary" %>
     <% end %>
   </div>
