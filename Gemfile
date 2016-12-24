@@ -4,10 +4,24 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
+#stylesheet
 gem 'bootstrap-sass', '>= 3.3.7'
 gem 'autoprefixer-rails'
-gem 'bcrypt', '3.1.11'
-gem 'bcrypt-ruby', '~> 3.0.0'
+
+#Faker
+gem 'faker', :git => 'https://github.com/stympy/faker.git'
+
+#Authentication
+gem 'bcrypt', '>= 3.1.3'
+gem 'bcrypt-ruby', '~> 3.1.0'
+
+# Upload Images
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'mini_magick'
+
+# Changes Pages
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'

@@ -4,15 +4,14 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@user, url:signup_path) do |f| %>
-      <% @item = @user %>
-      <%= render 'shared/error_messages' %>
+      <%= render 'shared/error_messages', item: @user %>
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
       <%= f.label :password, "密碼" %>
       <%= f.password_field :password, class: 'form-control' %>
-      <div class ="hint">請輸入6-20位密碼，英文需區分大小寫，請勿使用特殊符號</div><br>
+      <div class ="hint">請輸入6-20位密碼，必須參雜英文字母及數字，英文需區分大小寫，請勿使用特殊符號</div><br>
 
       <%= f.label :password_confirmation, "密碼確認" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
