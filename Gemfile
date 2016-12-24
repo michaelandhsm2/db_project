@@ -9,7 +9,7 @@ gem 'bootstrap-sass', '>= 3.3.7'
 gem 'autoprefixer-rails'
 
 #Faker
-gem 'faker',          '1.6.6'
+gem 'faker', :git => 'https://github.com/stympy/faker.git'
 
 #Authentication
 gem 'bcrypt', '>= 3.1.3'

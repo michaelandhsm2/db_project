@@ -2,7 +2,7 @@ class StoresController < ApplicationController
   before_action :set_store, only: [:show]
 
   def index
-    @stores = Store.all
+    @stores = Store.paginate(page: params[:page], :per_page => 10)
   end
 
   def show

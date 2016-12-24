@@ -1,14 +1,30 @@
 <% provide(:title, "商店") %>
 <h1>商店</h1>
 
-<div class="item">
-  <% @stores.each do |store| %>
-    <li>
-      <%= image_tag(store.image.thumb.url, alt: store.name, class: "gravatar") %>
-      <%= store.name %>
-      <%= link_to 'Edit', edit_owner_store_path(store) %>
-      <%= link_to 'Show', store_path(store.id) %>
-      <%= link_to 'Destroy', owner_store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %>
-    </li>
-  <% end %>
+
+<div class="row">
+<div class="col-md-2">
 </div>
+
+<div class="col-md-8">
+  <table class="table table-striped">
+    <tbody>
+      <% @stores.each do |store| %>
+        <tr>
+          <td><div class = "item"><%= store.id %></div></td>
+          <td><div class = "item"><%= image_tag(store.image.thumb.url, alt: store.name, class: "gravatar") %></div></td>
+          <td><div class = "item"><%= link_to store.name, store_path(store.id)  %></div></td>
+          <td><div class = "item"><%= link_to 'Edit', edit_owner_store_path(store) %></div></td>
+          <td><div class = "item"><%= link_to 'Destroy', owner_store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="col-md-2">
+</div>
+</div>
+
+
+
+<%= will_paginate %>
