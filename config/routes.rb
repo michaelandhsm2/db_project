@@ -27,11 +27,9 @@ Rails.application.routes.draw do
   #resources :items, only: [:index, :show]
 
 
-  namespace :owner do
-    resources :stores, except: [:index, :show, :new, :create] do
-      #resources :items, except: [:index, :show], shallow: true
-      #resources :events, shallow: true
-    end
+  resources :stores, except: [:index, :show, :new, :create] do
+    #resources :items, except: [:index, :show], shallow: true
+    #resources :events, shallow: true
   end
 
   #resources :items, only: [:index, :show]
