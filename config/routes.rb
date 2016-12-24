@@ -22,14 +22,22 @@ Rails.application.routes.draw do
 
   #post '/cart', to: 'orders#update'
 
-  resources :stores, only: [:index, :show, :new, :create]
+  resources :stores, only: [:index, :show]
+
+  get '/stores/new', to: redirect('/owner/stores/new')
+  get '/stores/:id/edit', to: redirect('/owner/stores/%{id}/edit')
 
   #resources :items, only: [:index, :show]
 
 
-  resources :stores, except: [:index, :show, :new, :create] do
-    #resources :items, except: [:index, :show], shallow: true
-    #resources :events, shallow: true
+  namespace :owner do
+    resources :stores, except: [:index, :show] do
+      #resources :items, except: [:index, :show], shallow: true
+      #resources :events, shallow: true
+    end
+
+    get '/stores/index', to: redirect('/stores/index')
+    get '/stores/:id', to: redirect('/stores/%{id}')
   end
 
   #resources :items, only: [:index, :show]
