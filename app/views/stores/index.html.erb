@@ -1,2 +1,14 @@
-<h1>Stores#index</h1>
-<p>Find me in app/views/stores/index.html.erb</p>
+<% provide(:title, "商店") %>
+<h1>商店</h1>
+
+<div class="item">
+  <% @stores.each do |store| %>
+    <li>
+      <%= image_tag(store.image.thumb.url, alt: store.name, class: "gravatar") %>
+      <%= store.name %>
+      <%= link_to 'Edit', edit_owner_store_path(store) %>
+      <%= link_to 'Show', store_path(store.id) %>
+      <%= link_to 'Destroy', owner_store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</div>

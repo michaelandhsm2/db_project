@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       #resources :events, shallow: true
     end
 
-    get '/stores/index', to: redirect('/stores/index')
+    get '/stores', to: redirect('/stores')
     get '/stores/:id', to: redirect('/stores/%{id}')
   end
 
