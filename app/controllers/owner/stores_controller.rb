@@ -1,5 +1,5 @@
 class Owner::StoresController < ApplicationController
-  before_action :set_store, only: [:edit, :update, :destroy]
+  before_filter :set_store, only: [:edit, :update, :destroy]
 
   def new
     @store = Store.new
@@ -9,6 +9,10 @@ class Owner::StoresController < ApplicationController
     @store = Store.new(store_params)
     if @store.save
       flash[:success] = "商店成功建立了！"
+      if(!@store.image.nil?)
+        @store.remote_image_url = "https://place-hold.it/300x240/aaa.png"
+        @store.save!
+      end
       redirect_to @store
     else
       render 'new'
@@ -28,9 +32,11 @@ class Owner::StoresController < ApplicationController
   end
 
   def destroy
-    @store.destroy
-    flash[:success] = "User deleted"
-    redirect_to 'index'
+    index = @store.id
+    if @store.destroy
+      flash[:success] = "User deleted"
+    end
+    redirect_to stores_path
   end
 
 end

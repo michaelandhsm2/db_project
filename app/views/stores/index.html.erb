@@ -9,6 +9,7 @@
 <div class="col-md-8">
   <table class="table table-striped">
     <tbody>
+      <% @stores.reload %>
       <% @stores.each do |store| %>
         <tr>
           <td><div class = "item"><%= store.id %></div></td>
@@ -20,11 +21,10 @@
       <% end %>
     </tbody>
   </table>
+  <div class = "center">
+    <%= will_paginate @stores, renderer: BootstrapPagination::Rails %>
+  </div>
 </div>
 <div class="col-md-2">
 </div>
 </div>
-
-
-
-<%= will_paginate %>

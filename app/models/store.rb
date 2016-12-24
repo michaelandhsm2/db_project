@@ -23,6 +23,7 @@ class Store < ApplicationRecord
 
   validate :image_size_validation
 
+
 end
 
 private

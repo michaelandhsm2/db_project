@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-50.times do |n|
+55.times do |n|
   store = Store.new
   store.name  = Faker::Company.unique.name
   store.address = Faker::GameOfThrones.city + Faker::Address.street_address + Faker::Address.secondary_address

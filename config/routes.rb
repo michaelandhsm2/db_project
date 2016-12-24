@@ -22,10 +22,10 @@ Rails.application.routes.draw do
 
   #post '/cart', to: 'orders#update'
 
-  resources :stores, only: [:index, :show]
-
   get '/stores/new', to: redirect('/owner/stores/new')
   get '/stores/:id/edit', to: redirect('/owner/stores/%{id}/edit')
+
+  resources :stores, only: [:index, :show]
 
   #resources :items, only: [:index, :show]
 
