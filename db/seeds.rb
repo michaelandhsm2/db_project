@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+r = Random.new
 
 55.times do |n|
   store = Store.new
@@ -15,4 +16,15 @@
   store.description = Faker::Hacker.say_something_smart
   store.remote_image_url = Faker::Company.logo
   store.save!
+end
+
+120.times do |n|
+  item = Item.new
+  item.name = Faker::Food.unique.ingredient
+  item.store = Store.find(r.rand(1..55))
+  item.quantity = r.rand(0..60)
+  item.price = r.rand(10..1000)
+  item.description = Faker::Hacker.say_something_smart
+  item.remote_image_url = Faker::LoremPixel.image("500x400", false, 'food')) + ".jpg"
+  item.save!
 end

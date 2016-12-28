@@ -2,6 +2,9 @@ class Item < ApplicationRecord
   belongs_to :store, inverse_of: :items
 
   mount_uploader :image, ImageUploader
+
+  validates :name         presence: true, unique: true
+
 =begin
   validates :quantity      presence: true, numericality: { greater_than_or_equal_to: 0 }
 
