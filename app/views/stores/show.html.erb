@@ -8,5 +8,4 @@
 <div class = "item"><%= @store.description %></div>
 <div><%= image_tag(@store.image.url, alt: @store.name) %></div>
 
-
-<p>Find me in app/views/stores/show.html.erb</p>
+<%= render 'items/list', items: @store.items.paginate(page: params[:page], :per_page => 5) %>

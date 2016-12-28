@@ -26,16 +26,23 @@ Rails.application.routes.draw do
   get '/stores/:id/edit', to: redirect('/owner/stores/%{id}/edit')
 
   resources :stores, only: [:index, :show]
-
-  #resources :items, only: [:index, :show]
+  get '/items', to: 'items#catalog'
+  get '/stores/:id/items', to: 'items#index'
+  get '/items/:id', to: 'items#show'
 
 
   namespace :owner do
     resources :stores, except: [:index, :show] do
-      #resources :items, except: [:index, :show], shallow: true
+      resources :items, except: [:index, :show], shallow: true
       #resources :events, shallow: true
     end
 
+
+    get '/items', to: redirect('/items')
+    get '/stores/:id/items', to: redirect('/stores/%{id}/items')
+    get '/stores/:store_id/items/:item_id', to: 'items#show'
+    post '/stores/:store_id/items/:item_id', to: 'items#update'
+    get '/items/:id', to: redirect('/items/%{id}')
     get '/stores', to: redirect('/stores')
     get '/stores/:id', to: redirect('/stores/%{id}')
   end

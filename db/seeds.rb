@@ -5,8 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+r = Random.new
 
-55.times do |n|
+25.times do |n|
   store = Store.new
   store.name  = Faker::Company.unique.name
   store.address = Faker::GameOfThrones.city + Faker::Address.street_address + Faker::Address.secondary_address
@@ -15,4 +16,16 @@
   store.description = Faker::Hacker.say_something_smart
   store.remote_image_url = Faker::Company.logo
   store.save!
+end
+
+250.times do |n|
+  item = Item.new
+  item.name = Faker::Food.unique.ingredient
+  item.store = Store.find(r.rand(1..15))
+  item.quantity = r.rand(0..60)
+  item.price = r.rand(10..1000)
+  item.description = Faker::Hacker.say_something_smart
+  item.image = Rails.root.join("app/assets/images/rnd/food/"+r.rand(1..40).to_s+".jpg").open
+  #item.remote_image_url = Faker::LoremPixel.image("500x400", false, 'food').to_s + "http://lorempixel.com/500/400/food.jpg"
+  item.save!
 end

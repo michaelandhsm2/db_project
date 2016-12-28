@@ -36,7 +36,7 @@ class Owner::StoresController < ApplicationController
     if @store.destroy
       flash[:success] = "User deleted"
     end
-    redirect_to stores_path
+    redirect_back fallback_location: stores_path
   end
 
 end

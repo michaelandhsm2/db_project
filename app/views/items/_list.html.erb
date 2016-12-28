@@ -1,0 +1,28 @@
+
+<div class="row">
+<div class="col-md-2">
+</div>
+
+<div class="col-md-8">
+  <table class="table table-striped">
+    <h1>商品列表</h1>
+    <tbody>
+      <% items.reload %>
+      <% items.each do |item| %>
+        <tr>
+          <td><div class = "item"><%= item.id %></div></td>
+          <td><div class = "item"><%= image_tag(item.image.thumb.url, alt: item.name, class: "gravatar") %></div></td>
+          <td><div class = "item"><%= link_to item.name, owner_item_path(item)  %></div></td>
+          <td><div class = "item"><%= link_to 'Edit', edit_owner_item_path(item) %></div></td>
+          <td><div class = "item"><%= link_to 'Destroy', owner_item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class = "center">
+    <%= will_paginate items, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>
+<div class="col-md-2">
+</div>
+</div>
