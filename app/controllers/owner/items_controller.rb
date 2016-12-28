@@ -12,7 +12,7 @@ class Owner::ItemsController < ApplicationController
     if @item.save
       flash[:success] = "商品成功建立了！"
       if(!@item.image.nil?)
-        @item.remote_image_url = "https://place-hold.it/300x240/aaa.png"
+        @item.image = Rails.root.join("app/assets/images/rnd/food/"+r.rand(1..40).to_s+".jpg").open
         @item.save!
       end
       redirect_to owner_item_path(@item)

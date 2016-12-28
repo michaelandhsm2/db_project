@@ -1,4 +1,4 @@
-<% provide(:title, "商店") %>
-<h1>商店</h1>
+<% provide(:title, @store.name+"的商品") %>
+<h1><%=@store.name%></h1>
 
 <%= render 'list', items: @items %>
