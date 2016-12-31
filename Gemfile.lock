@@ -1,12 +1,12 @@
 GIT
-  remote: https://github.com/stympy/faker.git
-  revision: a7cb1354df120faf74bc12fb662abcef4a664781
+  remote: http://github.com/stympy/faker.git
+  revision: deb032253cfb602c77bf611ae4de1c5090708237
   specs:
-    faker (1.6.6)
+    faker (1.7.1)
       i18n (~> 0.5)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actioncable (5.0.1)
       actionpack (= 5.0.1)

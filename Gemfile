@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -9,7 +9,7 @@ gem 'bootstrap-sass', '>= 3.3.7'
 gem 'autoprefixer-rails'
 
 #Faker
-gem 'faker', :git => 'https://github.com/stympy/faker.git'
+gem 'faker', :git => 'http://github.com/stympy/faker.git'
 
 #Authentication
 gem 'bcrypt', '>= 3.1.3'
