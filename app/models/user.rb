@@ -6,13 +6,15 @@ class User < ApplicationRecord
   VALID_CELLPHONE_REGEX = /09[0-9]{8}/
 
   before_save { self.email = email.downcase }
+  before_save { self.is_admin = false }
+  before_save { self.is_owner = false }
 
   validates :email,          presence: true, length: { maximum: 255 },
                              format: { with: VALID_EMAIL_REGEX },
                              uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password,       presence: true, format: { with: VALID_PASSWORD_REGEX }
+  validates :password,       presence: true, format: { with: VALID_PASSWORD_REGEX }, allow_blank: true
 
   validates :name,           presence: true, length: { minimum: 2, maximum: 50 }
 
@@ -29,5 +31,7 @@ class User < ApplicationRecord
 
   validates :gender,         allow_blank: true, inclusion: { in: ["male", "female"] }
 
-  validates :classification, allow_blank: true, inclusion: { in: ["member", "staff", "admin"] }
+  #validates :is_admin,       presence: true
+
+  #validates :is_owner,       presence: true
 end

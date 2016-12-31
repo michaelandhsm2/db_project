@@ -1,0 +1,43 @@
+<% provide(:title, "會員資料編輯") %>
+<h1>會員資料編輯</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages', item: @user %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control', disabled: true %>
+
+      <%= f.label :name, "姓名" %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :national_id, "身分證字號" %>
+      <%= f.text_field :national_id, class: 'form-control', disabled: true %>
+
+      <%= f.label :birthdate, "出生年月日" %>
+      <%= f.text_field :birthdate, class: 'form-control', disabled: true %>
+
+      <%= f.label :phone, "聯絡電話 (可不填)" %>
+      <%= f.text_field :phone, class: 'form-control' %>
+
+      <%= f.label :cellphone, "行動電話" %>
+      <%= f.text_field :cellphone, class: 'form-control' %>
+
+      <%= f.label :address, "聯絡地址" %>
+      <%= f.text_field :address, class: 'form-control' %>
+
+      <%= f.label :gender, "性別 (可不填)" %>
+      <%= f.select :gender, [["請選擇", ""], ["男", "male"], ["女", "female"]], {}, class: 'form-control' %>
+
+      <%= f.label :password, "密碼 (若不更換請留空)" %>
+      <%= f.password_field :password, class: 'form-control' %>
+      <div class ="hint">請輸入6-20位密碼，必須參雜英文字母及數字，英文需區分大小寫，請勿使用特殊符號</div><br>
+
+      <%= f.label :password_confirmation, "密碼確認" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.submit "儲存變更", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

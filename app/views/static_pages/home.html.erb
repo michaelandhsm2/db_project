@@ -7,5 +7,8 @@
     這是八肚夭購物平台的首頁。在此你可以在線上購買各種食品及食材，並且享受24小時內立即送達的快速服務。
     <%= image_tag("basket.png", alt: "Food-basket Image")%>
   </h2>
-  <%= link_to "立即註冊!", signup_path, class: "btn btn-lg btn-primary" %>
+
+  <% if !logged_in? %>
+    <%= link_to "立即註冊!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
 </div>
