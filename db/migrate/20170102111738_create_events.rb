@@ -20,7 +20,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
 
     create_table :seasons do |t|
 
-      t.interger    :discount
+      t.integer    :discount
       t.datetime    :start
       t.datetime    :end
       t.belongs_to  :events, index: true

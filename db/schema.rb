@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230133405) do
+ActiveRecord::Schema.define(version: 20170102111738) do
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "event_code_type"
+    t.integer  "event_code_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["event_code_type", "event_code_id"], name: "index_events_on_event_code_type_and_event_code_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.text     "description"
@@ -22,6 +32,38 @@ ActiveRecord::Schema.define(version: 20161230133405) do
     t.datetime "updated_at",  null: false
     t.string   "name"
     t.index ["store_id"], name: "index_items_on_store_id"
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer  "discount"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "events_id"
+    t.index ["events_id"], name: "index_seasons_on_events_id"
+  end
+
+  create_table "shippings", force: :cascade do |t|
+    t.integer "minimum_spending"
+    t.integer "discount"
+    t.integer "events_id"
+    t.index ["events_id"], name: "index_shippings_on_events_id"
+  end
+
+  create_table "specials", force: :cascade do |t|
+    t.integer  "minimum_spending"
+    t.integer  "discount"
+    t.integer  "free_cash"
+    t.integer  "events_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.index ["events_id"], name: "index_specials_on_events_id"
+  end
+
+  create_table "specials_items", id: false, force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "special_id"
+    t.index ["item_id"], name: "index_specials_items_on_item_id"
+    t.index ["special_id"], name: "index_specials_items_on_special_id"
   end
 
   create_table "stores", force: :cascade do |t|
