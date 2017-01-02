@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :store, inverse_of: :items
+  has_and_belongs_to_many :events
 
   mount_uploader :image, ImageUploader
 

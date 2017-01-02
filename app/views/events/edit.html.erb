@@ -1,0 +1,10 @@
+<% provide(:title, "商品修改") %>
+<h1>商品修改</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for [:owner, @item] do |f| %>
+      <%= render 'form', item: @item, f:f %>
+    <% end %>
+  </div>
+</div>
