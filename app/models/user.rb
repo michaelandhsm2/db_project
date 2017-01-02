@@ -5,9 +5,11 @@ class User < ApplicationRecord
   VALID_PHONE_REGEX = /0[0-9]{9}/
   VALID_CELLPHONE_REGEX = /09[0-9]{8}/
 
+  has_many :orders
+
   before_save { self.email = email.downcase }
-  before_save { self.is_admin = false }
-  before_save { self.is_owner = false }
+  before_validation { self.is_admin = false }
+  before_validation { self.is_owner = false }
 
   validates :email,          presence: true, length: { maximum: 255 },
                              format: { with: VALID_EMAIL_REGEX },
@@ -31,7 +33,7 @@ class User < ApplicationRecord
 
   validates :gender,         allow_blank: true, inclusion: { in: ["male", "female"] }
 
-  #validates :is_admin,       presence: true
+  validates :is_admin,       inclusion: { in: [true, false] }
 
-  #validates :is_owner,       presence: true
+  validates :is_owner,       inclusion: { in: [true, false] }
 end

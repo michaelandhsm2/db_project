@@ -1,0 +1,25 @@
+<% provide(:title, "購物車") %>
+<h1>購物車清單</h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if !@order_item.nil? && @order_item.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+        <% @order_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% if @order_items.size == 0 %>
+      <p class="text-center">
+        <h2>購物車內目前沒有商品, 立即 <%= link_to "前往選購", items_path %> </h2>
+      </p>
+    <% else %>
+      <% @order_items.each do |order_item| %>
+        <%= render 'carts/cart_row', item: order_item.item, order_item: order_item, show_total: true %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
