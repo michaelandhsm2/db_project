@@ -36,11 +36,11 @@ Rails.application.routes.draw do
   get '/stores/:id/items', to: 'items#index'
   get '/items/:id', to: 'items#show'
 
+  resources :events
 
   namespace :owner do
     resources :stores, except: [:index, :show] do
       resources :items, except: [:index, :show], shallow: true
-      #resources :events, shallow: true
     end
 
 
