@@ -1,3 +1,6 @@
 class Event < ApplicationRecord
-  has_one   :event_code, polymorphic: true
+  belongs_to  :event_code, polymorphic: true
+
+
+  validates :name, uniqueness: true, presence: true
 end

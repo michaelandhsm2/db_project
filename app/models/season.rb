@@ -1,3 +1,3 @@
 class Season < ApplicationRecord
-  belongs_to  :events, as: event_code
+  has_one  :event, as: :event_code
 end

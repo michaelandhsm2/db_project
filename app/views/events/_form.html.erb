@@ -1,0 +1,21 @@
+<%= form_for event_code, url: events_path do |f| %>
+  <%= render 'shared/error_messages', item: event_code %>
+
+  <%= f.fields_for :event do |s| %>
+    <%= s.label :name, "優惠顯示名稱" %>
+    <%= s.text_field :name, class: 'form-control' %>
+
+    <%= s.label :description, "詳細介紹 (可不填)" %>
+    <%= s.text_area :description, size: "60x8", class: 'form-control' %>
+  <% end %>
+
+  <% if params[:type] == "shipping" %>
+   <%= render 'shipping', event_code: event_code, f:f %>
+  <% elsif params[:type] == "season" %>
+   <%= render 'season', event_code: event_code, f:f %>
+  <% else %>
+   <%= render 'special', event_code: event_code, f:f %>
+  <% end %>
+
+  <%= f.submit "確認送出", class: "btn btn-primary" %>
+<% end %>
