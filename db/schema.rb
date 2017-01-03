@@ -35,6 +35,25 @@ ActiveRecord::Schema.define(version: 20170102123045) do
     t.index ["store_id"], name: "index_items_on_store_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "item_id"
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal  "total_price"
+    t.string   "status"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.integer  "discount"
     t.datetime "start"

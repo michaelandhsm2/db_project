@@ -19,14 +19,14 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :users, except: [:index, :new, :create] do
-    #resources :orders, only: [:index]
+    resources :orders, only: [:index]
   end
 
   #resource :orders, only: [:show]
 
-  #get '/cart', to: 'orders#edit'
+  resource :cart, only: [:show]
 
-  #post '/cart', to: 'orders#update'
+  resources :order_items, only: [:create, :update, :destroy]
 
   get '/stores/new', to: redirect('/owner/stores/new')
   get '/stores/:id/edit', to: redirect('/owner/stores/%{id}/edit')
