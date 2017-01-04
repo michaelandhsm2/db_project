@@ -36,7 +36,8 @@ Rails.application.routes.draw do
   get '/stores/:id/items', to: 'items#index'
   get '/items/:id', to: 'items#show'
 
-  resources :events
+  resources :events, except: [:new]
+  get '/events/new/:type', to: 'events#new'
 
   namespace :owner do
     resources :stores, except: [:index, :show] do

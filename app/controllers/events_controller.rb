@@ -5,28 +5,31 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
-  end
-
-  def edit
-    @event = Event.find(params[:id])
+    new_event(params[:type])
+    @event_code.build_event
   end
 
   def create
-    @event = Event.new(user_params)
-    if @event.save
-      log_in @event
-      flash[:success] = "註冊成功！"
+    create_event(params[:type])
+    if @event_code.save
+      flash[:success] = "活動建立成功！"
       redirect_to root_url
     else
       render 'new'
     end
   end
 
+  def edit
+    @event = Event.find(params[:id])
+    params[:type] = @event.event_code_type.downcase!
+    find_event(params[:type], @event.event_code_id)
+  end
+
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(user_params)
-      flash[:success] = "會員資料已變更"
+    find_event(params[:type], @event.event_code_id)
+    if update_event(params[:type])
+      flash[:success] = "活動資料已變更"
       redirect_to root_url
     else
       render 'edit'
@@ -41,3 +44,45 @@ class EventsController < ApplicationController
 
 
 end
+
+private
+
+  def new_event(event_code)
+    if event_code == "shipping"
+      @event_code = Shipping.new
+    elsif event_code == "season"
+      @event_code = Season.new
+    else
+      @event_code = Special.new
+    end
+  end
+
+  def create_event(event_code)
+    if event_code == "shipping"
+      @event_code = Shipping.new(params.require(:shipping).permit!)
+    elsif event_code == "season"
+      @event_code = Season.new(params.require(:season).permit!)
+    else
+      @event_code = Special.new(params.require(:special).permit!)
+    end
+  end
+
+  def update_event(event_code)
+    if event_code == "shipping"
+      @event_code.update_attributes(params.require(:shipping).permit!)
+    elsif event_code == "season"
+      @event_code.update_attributes(params.require(:season).permit!)
+    else
+      @event_code.update_attributes(params.require(:special).permit!)
+    end
+  end
+
+  def find_event(event_code, id)
+    if event_code == "shipping"
+      @event_code = Shipping.find(id)
+    elsif event_code == "season"
+      @event_code = Season.find(id)
+    else
+      @event_code = Special.find(id)
+    end
+  end
