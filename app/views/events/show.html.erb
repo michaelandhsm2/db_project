@@ -1,12 +1,7 @@
-<h1>Item#show</h1>
-<p>Find me in app/views/item/show.html.erb</p>
-
-<div class = "item"><%= @item.id %></div>
-<div class = "item"><%= @item.name %> FROM <%=@item.store.name%></div>
-<div class = "item">$<%= @item.price %></div>
-<div class = "item">#:<%= @item.quantity %></div>
-<div class = "item"><%= @item.description %></div>
-<div><%= image_tag(@item.image.url, alt: @item.name) %></div>
-
-
-<p>Find me in app/views/item/show.html.erb</p>
+<% if params[:type] == "shipping" %>
+ <%= render 'shipping', event_code: @event_code %>
+<% elsif params[:type] == "season" %>
+ <%= render 'season', event_code: @event_code %>
+<% else %>
+ <%= render 'special', event_code: @event_code %>
+<% end %>

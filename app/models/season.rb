@@ -1,3 +1,3 @@
 class Season < ApplicationRecord
-  has_one  :event, as: :event_code
+  has_one  :event, dependent: :destroy, as: :event_code
 end

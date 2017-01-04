@@ -1,7 +1,6 @@
-<%= f.label :minimum_spending, "最低消費" %>
-<%= f.number_field :minimum_spending, class: 'form-control' %>
+<h1>Shipping#show</h1>
 
-<%= f.label :discount, "運費折扣 (？％ off)" %>
-<%= f.number_field :discount, class: 'form-control' %>
-
-<%= hidden_field_tag "type", "shipping" %>
+<div class = "item"><%= event_code.event.id %></div>
+<div class = "item"><%= event_code.event.name %></div>
+<div class = "item">For any purchase above $<%= event_code.minimum_spending %>, <%= event_code.discount%>% off!</div>
+<div class = "item"><%= event_code.event.description %></div>
