@@ -1,4 +1,4 @@
-<%= form_for event_code, url: events_path do |f| %>
+
   <%= render 'shared/error_messages', item: event_code %>
 
   <%= f.fields_for :event do |s| %>
@@ -18,4 +18,3 @@
   <% end %>
 
   <%= f.submit "確認送出", class: "btn btn-primary" %>
-<% end %>
