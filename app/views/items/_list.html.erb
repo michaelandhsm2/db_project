@@ -2,27 +2,39 @@
 <div class="row">
 <div class="col-md-2">
 </div>
-
+<%@order_item = current_order.order_items.new%>
 <div class="col-md-8">
   <table class="table table-striped">
     <h1>商品列表</h1>
     <tbody>
       <% items.reload %>
       <% items.each do |item| %>
+
         <tr>
-          <td><div class = "item"><%= item.id %></div></td>
           <td><div class = "item"><%= image_tag(item.image.thumb.url, alt: item.name, class: "gravatar") %></div></td>
           <td><div class = "item"><%= link_to item.name, owner_item_path(item)  %></div></td>
+          <td><div class = "item">單價: NT<span style="color: green"><%= number_to_currency item.price %></span></h4></div></td>
+          <td><div class = "item">
+          <%= form_for @order_item, remote: true do |f| %>
+            <div class="input-group">
+              <% max = item.quantity < 20 ? item.quantity : 20 %>
+              <%= f.select :quantity, options_for_select(0..max), {}, class: "form-control" %>
+              <div class="input-group-btn">
+                <%= f.hidden_field :item_id, value: item.id %>
+                <%= f.submit "加入購物車", class: "btn btn-primary", data: { confirm: "你確定要將#{item.name}置入購物車嗎？"}  %>
+              </div>
+            </div>
+          <% end %></td>
           <td><div class = "item"><%= link_to 'Edit', edit_owner_item_path(item) %></div></td>
           <td><div class = "item"><%= link_to 'Destroy', owner_item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <div class = "center">
-    <%= will_paginate items, renderer: BootstrapPagination::Rails %>
-  </div>
 </div>
 <div class="col-md-2">
 </div>
+</div>
+<div class = "center">
+  <%= will_paginate items, renderer: BootstrapPagination::Rails %>
 </div>
