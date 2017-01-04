@@ -2,6 +2,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    params[:type] = @event.event_code_type.downcase!
+    find_event(params[:type], @event.event_code_id)
   end
 
   def new
@@ -37,9 +39,17 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event = Event.find(params[:id])
+    params[:type] = @event.event_code_type.downcase!
+    find_event(params[:type], @event.event_code_id)
+    if @event_code.destroy
+      flash[:success] = "Event deleted"
+    end
+    redirect_back fallback_location: events_path
   end
 
   def index
+    @events = Event.paginate(page: params[:page], :per_page => 10)
   end
 
 

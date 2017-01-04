@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="text-right">
+          <span style="font-size: 1.2em">商品合計: NT<span style="color: green"><%= number_to_currency current_order.total_price %></span></span>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-right">
+          <span style="font-size: 1.2em">總價: NT<span style="color: green"><%= number_to_currency current_order.total_price %></span></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-10">
+      <%= link_to "繼續購物", items_path, class: "btn btn-primary" %>
+      <%= link_to "下一步", items_path, class: "btn btn-primary pull-right" %>
+  </div>
+</div>
