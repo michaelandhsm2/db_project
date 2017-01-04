@@ -10,6 +10,7 @@
   <% end %>
 
   <% if params[:type] == "shipping" %>
+
     <%= f.label :minimum_spending, "最低消費" %>
     <%= f.number_field :minimum_spending, class: 'form-control' %>
 
@@ -17,8 +18,20 @@
     <%= f.number_field :discount, class: 'form-control' %>
 
     <%= hidden_field_tag "type", "shipping" %>
+
   <% elsif params[:type] == "season" %>
-   <%= render 'season', event_code: event_code, f:f %>
+
+    <%= f.label :discount, "全館折扣 (？％ off)" %>
+    <%= f.number_field :discount, class: 'form-control' %>
+
+    <%= f.label :start_date, "優惠開始時間" %>
+    <%= f.datetime_field :start_date, class: 'form-control' %>
+
+    <%= f.label :end_date, "優惠結束時間" %>
+    <%= f.datetime_field :end_date, class: 'form-control' %>
+
+    <%= hidden_field_tag "type", "season" %>
+
   <% else %>
    <%= render 'special', event_code: event_code, f:f %>
   <% end %>

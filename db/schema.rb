@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103083654) do
+ActiveRecord::Schema.define(version: 20170104045011) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(version: 20170103083654) do
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "discount"
-    t.datetime "start"
-    t.datetime "end"
     t.integer  "events_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.index ["events_id"], name: "index_seasons_on_events_id"
   end
 
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20170103083654) do
     t.integer  "discount"
     t.integer  "free_cash"
     t.integer  "events_id"
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.index ["events_id"], name: "index_specials_on_events_id"
   end
 
