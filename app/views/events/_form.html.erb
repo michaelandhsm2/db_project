@@ -33,11 +33,26 @@
     <%= f.label :end_date, "優惠結束時間" %>
     <%= f.datetime_field :end_date, class: 'form-control' %>
 
+    <%= hidden_field_tag "type", "season" %>
+
+  <% elsif params[:type] == "special" %>
+
+    <%= f.label :item_id, "優惠store" %>
+    <%= f.collection_select(:item_ids,  Item.all, :id, :name , {prompt: '----Select Store----'}, :multiple => true) %>
+
+    <%= f.label :discount, "全館折扣 (？％ off)" %>
+    <%= f.number_field :discount, class: 'form-control' %>
+
+    <%= f.label :start_date, "優惠開始時間" %>
+    <%= f.datetime_field :start_date, class: 'form-control' %>
+
+    <%= f.label :end_date, "優惠結束時間" %>
+    <%= f.datetime_field :end_date, class: 'form-control' %>
 
     <%= hidden_field_tag "type", "season" %>
 
   <% else %>
-   <%= render 'special', event_code: event_code, f:f %>
+
   <% end %>
 
   <%= f.submit "確認送出", class: "btn btn-primary" %>
