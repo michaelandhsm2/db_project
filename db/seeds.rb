@@ -21,8 +21,8 @@ end
 250.times do |n|
   item = Item.new
   item.name = Faker::Food.unique.ingredient
-  item.store = Store.find(r.rand(1..15))
-  item.quantity = r.rand(0..60)
+  item.store = Store.find(r.rand(1..25))
+  item.quantity = r.rand(0..25)
   item.price = r.rand(10..1000)
   item.description = Faker::Hacker.say_something_smart
   item.image = Rails.root.join("app/assets/images/rnd/food/"+r.rand(1..40).to_s+".jpg").open

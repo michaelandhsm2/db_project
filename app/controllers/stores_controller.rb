@@ -1,17 +1,18 @@
 class StoresController < ApplicationController
-  before_action :set_store, only: [:show]
 
   def index
     @stores = Store.paginate(page: params[:page], :per_page => 10)
   end
 
   def show
+    @store = Store.find(params[:id])
+    @store.events.each do |e|
+      if e.start_date < DateTime.current && e.end_date > DateTime.current
+        flash_message_now :info, "#{e.event.name} - Everything in #{e.store.name} is #{e.discount}% off between #{e.start_date.strftime("%b %e, %C%y")} and #{e.end_date.strftime("%b %e, %C%y")}."
+      end
+    end
   end
 
 end
 
 private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_store
-    @store = Store.find(params[:id])
-  end
