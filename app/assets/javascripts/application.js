@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require custom
 //= require bootstrap-sprockets
 //= require jquery-multi-select
+//= require jquery-quicksearch
+//= require custom
 //= require_tree.
