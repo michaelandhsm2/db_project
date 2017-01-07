@@ -21,7 +21,7 @@
 
   <% elsif params[:type] == "season" %>
 
-    <%= f.label :store_id, "優惠store" %>
+    <%= f.label :store_id, "優惠商家" %>
     <%= f.select(:store_id,  Store.all.collect {|p| [ p.name, p.id ] }, {prompt: '----Select Store----'}) %>
 
     <%= f.label :discount, "全館折扣 (？％ off)" %>
@@ -37,8 +37,13 @@
 
   <% elsif params[:type] == "special" %>
 
-    <%= f.label :item_id, "優惠store" %>
-    <%= f.collection_select(:item_ids,  Item.all, :id, :name , {prompt: '----Select Store----'}, :multiple => true) %>
+    <% item_options = []%>
+    <% Store.all.each do |s|%>
+      <% item_options << [s.name, s.items.collect{|p| [p.name, p.id]}] %>
+    <% end%>
+
+    <%= f.label :item_id, "優惠商品" %>
+    <%= f.select(:item_ids, grouped_options_for_select(item_options, event_code.item_ids), {}, :multiple => true, id: 'optgroup') %>
 
     <%= f.label :discount, "全館折扣 (？％ off)" %>
     <%= f.number_field :discount, class: 'form-control' %>
@@ -49,7 +54,7 @@
     <%= f.label :end_date, "優惠結束時間" %>
     <%= f.datetime_field :end_date, class: 'form-control' %>
 
-    <%= hidden_field_tag "type", "season" %>
+    <%= hidden_field_tag "type", "special" %>
 
   <% else %>
 
