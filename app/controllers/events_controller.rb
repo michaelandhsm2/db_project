@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     find_event(params[:type], @event.event_code_id)
     if update_event(params[:type])
       flash[:success] = "活動資料已變更"
-      redirect_to root_url
+      redirect_to event_path(params[:id])
     else
       render 'edit'
     end

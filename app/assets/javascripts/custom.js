@@ -1,4 +1,4 @@
-$(document).on('ready page:load', function ()  {
+$(document).on('ready page:load turbolinks:load', function ()  {
   $('#optgroup').multiSelect({
 
     selectableFooter: "<div class='custom-header'> </div>",
