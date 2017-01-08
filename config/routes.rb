@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :tags
     resources :users, only: [:index, :show, :update]
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show, :update]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

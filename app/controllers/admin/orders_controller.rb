@@ -10,6 +10,11 @@ class Admin::OrdersController < ApplicationController
     @order_items = @order.order_items
   end
 
+  def update
+    @order = Order.find(params[:id])
+    @order.update_attributes(order_params)
+  end
+
   private
 
     def is_admin?
@@ -17,5 +22,9 @@ class Admin::OrdersController < ApplicationController
         flash[:danger] =  "你的身分並非管理者"
         redirect_to root_url
       end
+    end
+
+    def order_params
+      params.require(:order).permit(:status)
     end
 end

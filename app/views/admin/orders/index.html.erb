@@ -18,7 +18,13 @@
             <td><div class = "item"><%= order.created_at.localtime %></div></td>
             <td><div class = "item"><%= order.id %></div></td>
             <td><div class = "item"><%= order.user_id %></div></td>
-            <td><div class = "item"><%= order_status(order) %></div></td>
+            <td><div class = "item">
+              <%= form_for order, url: admin_order_path(order), remote: true do |f| %>
+              <%= f.select :status, [["訂單尚未送出", nil], ["訂單已送出", "received"], ["出貨準備中", "processing"], ["運送中", "shipping"], ["完成", "complete"]], {},
+                           :onchange => "$(this.form).submit();", class: 'form-control' %>
+              <%= f.hidden_field :order_id, value: order.id %>
+              <% end %>
+            </div></td>
             <td><div class = "item"><%= order.total_price %></div></td>
             <td><div class = "item"><%= order.user.address %></div></td>
             <td><div class = "item"><%= link_to "檢視", admin_order_path(order.id) %></div></td>
