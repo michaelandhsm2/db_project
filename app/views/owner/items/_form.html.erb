@@ -7,6 +7,9 @@
   <%= f.label :price, "價格" %>
   <%= f.number_field :price, class: 'form-control' %>
 
+  <%= f.label :tag_list, "標籤" %>
+  <%= f.text_field :tag_list, value: f.object.tag_list.to_s, id: 'myTags'%>
+
   <%= f.label :quantity, "庫存數量" %>
   <%= f.number_field :quantity, class: 'form-control' %>
 

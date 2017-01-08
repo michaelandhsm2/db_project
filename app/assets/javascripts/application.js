@@ -11,9 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require tag-it
 //= require bootstrap-sprockets
 //= require jquery-multi-select
 //= require jquery-quicksearch

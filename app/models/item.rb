@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   has_and_belongs_to_many :specials, inverse_of: :items
   has_and_belongs_to_many :coupons, inverse_of: :items
 
+  acts_as_taggable
+
   mount_uploader :image, ImageUploader
 
 =begin
