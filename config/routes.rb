@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   delete '/logout', to: 'sessions#destroy'
 
-  resources :users, except: [:index, :new, :create] do
+  resources :users, except: [:index, :show, :new, :create, :destroy] do
     resources :orders, only: [:index]
   end
 
@@ -58,12 +58,10 @@ Rails.application.routes.draw do
 
   #resources :items, only: [:index, :show]
 
-=begin
   namespace :admin do
     resources :tags
-    resources :users, only: [:index]
+    resources :users, only: [:index, :show, :update]
   end
-=end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

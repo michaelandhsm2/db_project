@@ -10,8 +10,7 @@ class User < ApplicationRecord
   has_many :owned_stores, class_name: "Store", inverse_of: :owner
 
   before_save { self.email = email.downcase }
-  before_validation { self.is_admin = false }
-  before_validation { self.is_owner = false }
+  before_validation :set_default, unless: :persisted?
 
   validates :email,          presence: true, length: { maximum: 255 },
                              format: { with: VALID_EMAIL_REGEX },
@@ -38,4 +37,8 @@ class User < ApplicationRecord
   validates :is_admin,       inclusion: { in: [true, false] }
 
   validates :is_owner,       inclusion: { in: [true, false] }
+
+  def set_default
+    self.is_admin = false if self.is_admin.nil?
+  end
 end

@@ -30,6 +30,9 @@
       <%= f.label :gender, "性別 (可不填)" %>
       <%= f.select :gender, [["請選擇", ""], ["男", "male"], ["女", "female"]], {}, class: 'form-control' %>
 
+      <%= f.label :is_owner, "申請商家身分" %>
+      <%= f.select :is_owner, [["請選擇", ""], ["是", "true"], ["否", "false"]], {}, class: 'form-control' %>
+
       <%= f.label :password, "密碼 (若不更換請留空)" %>
       <%= f.password_field :password, class: 'form-control' %>
       <div class ="hint">請輸入6-20位密碼，必須參雜英文字母及數字，英文需區分大小寫，請勿使用特殊符號</div><br>

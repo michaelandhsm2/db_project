@@ -40,6 +40,9 @@
       <%= f.label :gender, "性別 (可不填)" %>
       <%= f.select :gender, [["請選擇", ""], ["男", "male"], ["女", "female"]], {}, class: 'form-control' %>
 
+      <%= f.label :is_owner, "申請商家身分" %>
+      <%= f.select :is_owner, [["請選擇", ""], ["是", "true"], ["否", "false"]], {}, class: 'form-control' %>
+
       <%= f.submit "確認送出", class: "btn btn-primary" %>
     <% end %>
   </div>

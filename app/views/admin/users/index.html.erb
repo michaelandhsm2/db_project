@@ -1,0 +1,33 @@
+<% provide(:title, "會員列表") %>
+<h1>會員列表</h1>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-striped">
+      <tbody>
+        <td><div class = "item">會員編號</div></td>
+        <td><div class = "item">電子郵件帳號</div></td>
+        <td><div class = "item">商店擁有者: </div></td>
+        <td><div class = "item">系統管理員: </div></td>
+        <% @users.reload %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><div class = "item"><%= user.id %></div></td>
+            <td><div class = "item"><%= link_to user.email, admin_user_path(user.id)  %></div></td>
+            <td><div class = "item"><%= user.is_owner %></div></td>
+            <td><div class = "item">
+              <%= form_for user, url: admin_user_path(user), remote: true do |f| %>
+              <%= f.select :is_admin, [["是", "true"], ["否", "false"]], {}, :onchange => "$(this.form).submit();", class: 'form-control' %>
+              <%= f.hidden_field :user_id, value: user.id %>
+              <% end %>
+            </div></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class = "center">
+      <%= will_paginate @stores, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>
