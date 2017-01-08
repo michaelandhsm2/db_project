@@ -1,0 +1,26 @@
+<% provide(:title, "確認訂單資料") %>
+<h1>確認訂單資料</h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <tbody>
+        <td><div class = "item">商品名稱</div></td>
+        <td><div class = "item">數量</div></td>
+        <td><div class = "item">商品價格</div></td>
+        <td><div class = "item">商品小計</div></td>
+        <% @order_items.each do |order_item| %>
+          <tr>
+            <td><div class = "item"><%= order_item.item.name %></div></td>
+            <td><div class = "item"><%= order_item.quantity %></div></td>
+            <td><div class = "item"><%= order_item.item.price %></div></td>
+            <td><div class = "item"><%= order_item.item.price * order_item.quantity %></div></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= render 'carts/total_price_row' %>
+<%= render 'carts/confirmation_button_row' %>

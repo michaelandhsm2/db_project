@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   #resource :orders, only: [:show]
 
   resource :cart, only: [:show]
+  get '/cart_confirmation', to: 'carts#confirm'
+  post '/cart_confirmation', to: 'carts#submit'
 
   resources :order_items, only: [:create, :update, :destroy]
 
