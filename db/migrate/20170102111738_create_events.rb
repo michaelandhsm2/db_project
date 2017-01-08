@@ -21,28 +21,38 @@ class CreateEvents < ActiveRecord::Migration[5.0]
     create_table :seasons do |t|
 
       t.integer    :discount
-      t.datetime    :start
-      t.datetime    :end
+      t.datetime    :start_date
+      t.datetime    :end_date
+      t.belongs_to  :store, index:true
       t.belongs_to  :events, index: true
 
     end
 
     create_table :specials do |t|
 
+      t.integer     :discount
+      t.belongs_to  :events, index: true
+
+      t.datetime    :start_date
+      t.datetime    :end_date
+
+    end
+
+    create_table :coupons do |t|
+
 
       t.integer     :minimum_spending
-      t.integer     :discount
       t.integer     :free_cash
       t.belongs_to  :events, index: true
 
-      t.datetime    :start
-      t.datetime    :end
+      t.datetime    :start_date
+      t.datetime    :end_date
 
     end
 
-    create_table :specials_items, id: false do |t|
-      t.belongs_to :item, index: true
-      t.belongs_to :special, index: true
-    end
+
+    create_join_table :items, :coupons
+
+    create_join_table :items, :specials
   end
 end

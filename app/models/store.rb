@@ -1,6 +1,7 @@
 class Store < ApplicationRecord
 
   has_many :items, dependent: :destroy, inverse_of: :store
+  has_many :events, dependent: :destroy, class_name: "Season", inverse_of: :store
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PHONE_REGEX = /0[0-9]{9}/

@@ -1,0 +1,16 @@
+<h1>Season#show</h1>
+
+<div class = "item"><%= event_code.event.id %></div>
+<div class = "item"><%= event_code.event.name %></div>
+<div class = "item"><%= event_code.start_date.to_formatted_s(:long) %> to <%=event_code.end_date.to_formatted_s(:long)%> </div>
+<div class = "item">For any of the following items, <%= event_code.discount%>% off!</div>
+<div class = "item"><%= event_code.event.description %></div>
+<% names = event_code.items.collect{|i| i.store.name}.uniq! %>
+<% if names.nil? %>
+  <% names = event_code.items[0].store.name %>
+<% else %>
+  <% names = names.join(', ') %>
+<% end %>
+<div class = "item">Stores collaborating for this event: <%= names %></div>
+
+<%= render 'items/list', items: event_code.items.paginate(page: params[:page], :per_page => 5) %>

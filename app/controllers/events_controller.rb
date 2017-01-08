@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     find_event(params[:type], @event.event_code_id)
     if update_event(params[:type])
       flash[:success] = "活動資料已變更"
-      redirect_to root_url
+      redirect_to event_path(params[:id])
     else
       render 'edit'
     end
@@ -62,8 +62,10 @@ private
       @event_code = Shipping.new
     elsif event_code == "season"
       @event_code = Season.new
-    else
+    elsif event_code == "special"
       @event_code = Special.new
+    else
+      @event_code = Coupon.new
     end
   end
 
@@ -72,8 +74,10 @@ private
       @event_code = Shipping.new(params.require(:shipping).permit!)
     elsif event_code == "season"
       @event_code = Season.new(params.require(:season).permit!)
-    else
+    elsif event_code == "special"
       @event_code = Special.new(params.require(:special).permit!)
+    else
+      @event_code = Coupon.new(params.require(:coupon).permit!)
     end
   end
 
@@ -82,8 +86,10 @@ private
       @event_code.update_attributes(params.require(:shipping).permit!)
     elsif event_code == "season"
       @event_code.update_attributes(params.require(:season).permit!)
-    else
+    elsif event_code == "special"
       @event_code.update_attributes(params.require(:special).permit!)
+    else
+      @event_code.update_attributes(params.require(:coupon).permit!)
     end
   end
 
@@ -92,7 +98,9 @@ private
       @event_code = Shipping.find(id)
     elsif event_code == "season"
       @event_code = Season.find(id)
-    else
+    elsif event_code == "special"
       @event_code = Special.find(id)
+    else
+      @event_code = Coupon.find(id)
     end
   end

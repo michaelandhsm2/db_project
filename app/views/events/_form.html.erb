@@ -21,6 +21,9 @@
 
   <% elsif params[:type] == "season" %>
 
+    <%= f.label :store_id, "優惠商家" %>
+    <%= f.select(:store_id,  Store.all.collect {|p| [ p.name, p.id ] }, {prompt: '----Select Store----'}) %>
+
     <%= f.label :discount, "全館折扣 (？％ off)" %>
     <%= f.number_field :discount, class: 'form-control' %>
 
@@ -32,8 +35,51 @@
 
     <%= hidden_field_tag "type", "season" %>
 
+  <% elsif params[:type] == "special" %>
+
+    <% item_options = []%>
+    <% Store.all.each do |s|%>
+      <% item_options << [s.name, s.items.collect{|p| [p.name, p.id]}] %>
+    <% end%>
+
+    <%= f.label :item_id, "優惠商品" %>
+    <%= f.select(:item_ids, grouped_options_for_select(item_options, event_code.item_ids), {}, :multiple => true, id: 'optgroup') %>
+
+    <%= f.label :discount, "全館折扣 (？％ off)" %>
+    <%= f.number_field :discount, class: 'form-control' %>
+
+    <%= f.label :start_date, "優惠開始時間" %>
+    <%= f.datetime_field :start_date, class: 'form-control' %>
+
+    <%= f.label :end_date, "優惠結束時間" %>
+    <%= f.datetime_field :end_date, class: 'form-control' %>
+
+    <%= hidden_field_tag "type", "special" %>
+
   <% else %>
-   <%= render 'special', event_code: event_code, f:f %>
+
+    <% item_options = []%>
+    <% Store.all.each do |s|%>
+      <% item_options << [s.name, s.items.collect{|p| [p.name, p.id]}] %>
+    <% end%>
+
+    <%= f.label :item_id, "優惠商品" %>
+    <%= f.select(:item_ids, grouped_options_for_select(item_options, event_code.item_ids), {}, :multiple => true, id: 'optgroup') %>
+
+    <%= f.label :minimum_spending, "優惠適用消費底限" %>
+    <%= f.number_field :minimum_spending, class: 'form-control' %>
+
+    <%= f.label :free_cash, "贈送金額" %>
+    <%= f.number_field :free_cash, class: 'form-control' %>
+
+    <%= f.label :start_date, "優惠開始時間" %>
+    <%= f.datetime_field :start_date, class: 'form-control' %>
+
+    <%= f.label :end_date, "優惠結束時間" %>
+    <%= f.datetime_field :end_date, class: 'form-control' %>
+
+    <%= hidden_field_tag "type", "coupon" %>
+
   <% end %>
 
   <%= f.submit "確認送出", class: "btn btn-primary" %>
