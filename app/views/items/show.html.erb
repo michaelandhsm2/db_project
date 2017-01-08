@@ -9,4 +9,10 @@
 <div><%= image_tag(@item.image.url, alt: @item.name) %></div>
 
 
+
+<div>
+  <%= render 'tags/list', tags: @item.tags%>
+</div>
+
+
 <p>Find me in app/views/item/show.html.erb</p>

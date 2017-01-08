@@ -26,6 +26,10 @@ gem 'will_paginate-bootstrap'
 # Jquerey trubolinks fix
 gem 'jquery-turbolinks'
 
+# Add Taggable
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
+gem 'acts-as-taggable-on', '~> 4.0'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets

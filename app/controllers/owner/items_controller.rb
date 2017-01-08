@@ -46,7 +46,7 @@ end
 private
   # Never trust parameters from the scary internet, only allow the white list through.
   def item_params
-    params.require(:item).permit(:name, :price, :quantity, :description, :image)
+    params.require(:item).permit(:name, :price, :quantity, :description, :image, :tag_list)
   end
 
   # Use callbacks to share common setup or constraints between actions.

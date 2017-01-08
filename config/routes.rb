@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/stores/:id/items', to: 'items#index'
   get '/items/:id', to: 'items#show'
 
+  resources :tags, only: [:show, :index], param: :label
+
   resources :events, except: [:new]
   get '/events/new/:type', to: 'events#new'
 

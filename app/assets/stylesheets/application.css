@@ -12,5 +12,8 @@
  *
  *= require_tree .
  *= require multi-select
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
+ *= require jquery-ui
  *= require_self
  */
