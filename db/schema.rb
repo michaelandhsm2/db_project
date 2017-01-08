@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108021609) do
+ActiveRecord::Schema.define(version: 20170108050038) do
 
   create_table "coupons", force: :cascade do |t|
     t.integer  "minimum_spending"
@@ -106,6 +106,13 @@ ActiveRecord::Schema.define(version: 20170108021609) do
     t.datetime "updated_at",  null: false
     t.text     "description"
     t.string   "image"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_stores_on_user_id"
+  end
+
+  create_table "stores_users", id: false, force: :cascade do |t|
+    t.integer "user_id",  null: false
+    t.integer "store_id", null: false
   end
 
   create_table "taggings", force: :cascade do |t|

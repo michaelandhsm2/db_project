@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, inverse_of: :orders
   has_many :order_items
 
   before_validation { self.status = "received"}

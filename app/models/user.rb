@@ -5,7 +5,9 @@ class User < ApplicationRecord
   VALID_PHONE_REGEX = /0[0-9]{9}/
   VALID_CELLPHONE_REGEX = /09[0-9]{8}/
 
-  has_many :orders
+  has_many :orders, inverse_of: :user
+  has_and_belongs_to_many :stores, inverse_of: :users
+  has_many :owned_stores, class_name: "Store", inverse_of: :owner
 
   before_save { self.email = email.downcase }
   before_validation { self.is_admin = false }
