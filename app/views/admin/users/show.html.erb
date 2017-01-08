@@ -1,0 +1,74 @@
+<% provide(:title, "會員資料檢視") %>
+<h1>會員資料檢視</h1>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+            <div class="col-md-4">電子郵件帳號: </div>
+            <div class="col-md-6"><%= @user.email %></div>
+        </div></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">會員姓名: </div>
+          <div class="col-md-6"><%= @user.name %></div>
+        </div></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">身分證字號: </div>
+          <div class="col-md-6"><%= @user.national_id %>
+        </div></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">出生年月日: </div>
+          <div class="col-md-6"><%= @user.birthdate %></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">聯絡電話: </div>
+          <div class="col-md-6"><%= @user.phone %>
+        </div></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">行動電話: </div>
+          <div class="col-md-6"><%= @user.cellphone %>
+        </div></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">聯絡地址: </div>
+          <div class="col-md-6"><%= @user.address %>
+        </div></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">性別: </div>
+          <div class="col-md-6"><%= @user.gender %>
+        </div></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">商家身分: </div>
+          <div class="col-md-6"><%= @user.is_owner %>
+        </div></span></div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-center"><span style="font-size: 1.2em"><div class="row">
+          <div class="col-md-4">系統管理身分: </div>
+          <div class="col-md-6"><%= @user.is_admin %>
+        </div></span></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-10">
+      <%= link_to "上一頁", admin_users_path, class: "btn btn-primary" %>
+  </div>
+</div>
