@@ -11,8 +11,8 @@
       <% items.each do |item| %>
 
         <tr>
-          <td><div class = "item"></div></td>
-          <td><div class = "item"><%= link_to item.name, owner_item_path(item)  %></div></td>
+          <td><div class = "item"><%= image_tag(item.image.thumb.url, alt: item.name, class: "gravatar") %></div></td>
+          <td><div class = "item"><%= link_to item.name, owner_item_path(item) %></div></td>
           <td><div class = "item">單價: NT<span style="color: green"><%= number_to_currency item.price %></span></h4></div></td>
           <td><div class = "item">
           <%= form_for @order_item, remote: true do |f| %>

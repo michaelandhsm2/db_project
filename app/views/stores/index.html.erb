@@ -13,8 +13,8 @@
       <% @stores.each do |store| %>
         <tr>
           <td><div class = "item"><%= store.id %></div></td>
-          <td><div class = "item"></div></td>
-          <td><div class = "item"><%= link_to store.name, store_path(store.id)  %></div></td>
+          <td><div class = "item"><%= image_tag(store.image.thumb.url, alt: store.name, class: "gravatar") %></div></td>
+          <td><div class = "item"><%= link_to store.name, store_path(store.id) %></div></td>
           <td><div class = "item"><%= link_to 'Edit', edit_owner_store_path(store) %></div></td>
           <td><div class = "item"><%= link_to 'Destroy', owner_store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
         </tr>
