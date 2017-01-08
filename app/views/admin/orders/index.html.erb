@@ -1,0 +1,30 @@
+<% provide(:title, "會員訂單管理") %>
+<h1>會員訂單管理</h1>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-striped">
+      <tbody>
+        <td><div class = "item">訂購日期</div></td>
+        <td><div class = "item">訂單編號</div></td>
+        <td><div class = "item">會員編號</div></td>
+        <td><div class = "item">處理進度</div></td>
+        <td><div class = "item">訂單金額</div></td>
+        <% @orders.reload %>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><div class = "item"><%= order.created_at.localtime %></div></td>
+            <td><div class = "item"><%= order.id %></div></td>
+            <td><div class = "item"><%= order.user_id %></div></td>
+            <td><div class = "item"><%= order_status(order) %></div></td>
+            <td><div class = "item"><%= order.total_price %></div></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class = "center">
+      <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>

@@ -2,10 +2,9 @@ class Order < ApplicationRecord
   belongs_to :user, inverse_of: :orders
   has_many :order_items
 
-  before_validation { self.status = "received"}
   before_save :update_total_price
 
-  validates :status, inclusion: { in: ["received", "processing", "shipping", "complete"] }
+  validates :status, inclusion: { in: [nil, "received", "processing", "shipping", "complete"] }
 
   def total_price
     order_items.collect { |tuple| tuple.valid? ? (tuple.quantity * tuple.item.price) : 0 }.sum

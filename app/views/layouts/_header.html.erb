@@ -15,10 +15,11 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "會員資料編輯", edit_user_path(current_user) %></li>
-              <li><%= link_to "消費歷史紀錄", '#' %></li>
+              <li><%= link_to "消費歷史紀錄", user_orders_path(current_user) %></li>
               <li class="divider"></li>
               <% if current_user.is_admin %>
                 <li><%= link_to "會員列表檢視", admin_users_path %></li>
+                <li><%= link_to "會員訂單管理", admin_orders_path %></li>
                 <li class="divider"></li>
               <% end %>
               <li>

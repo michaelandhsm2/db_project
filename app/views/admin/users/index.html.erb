@@ -9,11 +9,12 @@
         <td><div class = "item">電子郵件帳號</div></td>
         <td><div class = "item">商店擁有者: </div></td>
         <td><div class = "item">系統管理員: </div></td>
+        <td><div class = "item">會員資料檢視</div></td>
         <% @users.reload %>
         <% @users.each do |user| %>
           <tr>
             <td><div class = "item"><%= user.id %></div></td>
-            <td><div class = "item"><%= link_to user.email, admin_user_path(user.id)  %></div></td>
+            <td><div class = "item"><%= user.email %></div></td>
             <td><div class = "item"><%= user.is_owner %></div></td>
             <td><div class = "item">
               <%= form_for user, url: admin_user_path(user), remote: true do |f| %>
@@ -21,6 +22,7 @@
               <%= f.hidden_field :user_id, value: user.id %>
               <% end %>
             </div></td>
+            <td><div class = "item"><%= link_to "檢視", admin_user_path(user.id) %></div></td>
           </tr>
         <% end %>
       </tbody>

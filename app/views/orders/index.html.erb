@@ -1,0 +1,14 @@
+<% provide(:title, "消費歷史紀錄") %>
+<h1>消費歷史紀錄</h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @orders.size == 0 %>
+      <p class="text-center">
+        <h2>目前尚無任何消費紀錄, 立即 <%= link_to "前往選購", items_path %> </h2>
+      </p>
+    <% else %>
+      <%= render 'orders/order_row' %>
+    <% end %>
+  </div>
+</div>
