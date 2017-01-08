@@ -2,6 +2,8 @@
  <%= render 'shipping', event_code: @event_code %>
 <% elsif params[:type] == "season" %>
  <%= render 'season', event_code: @event_code %>
-<% else %>
+<% elsif params[:type] == "special"  %>
  <%= render 'special', event_code: @event_code %>
+<% else %>
+ <%= render 'coupon', event_code: @event_code %>
 <% end %>
