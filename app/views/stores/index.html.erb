@@ -1,30 +1,59 @@
 <% provide(:title, "商店") %>
-<h1>商店</h1>
 
 
+<h1>商店列表</h1>
+<% if !current_user.nil? && current_user.is_owner %>
 <div class="row">
-<div class="col-md-2">
-</div>
-
-<div class="col-md-8">
-  <table class="table table-striped">
-    <tbody>
-      <% @stores.reload %>
-      <% @stores.each do |store| %>
-        <tr>
-          <td><div class = "item"><%= store.id %></div></td>
-          <td><div class = "item"><%= image_tag(store.image.thumb.url, alt: store.name, class: "gravatar") %></div></td>
-          <td><div class = "item"><%= link_to store.name, store_path(store.id) %></div></td>
-          <td><div class = "item"><%= link_to 'Edit', edit_owner_store_path(store) %></div></td>
-          <td><div class = "item"><%= link_to 'Destroy', owner_store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class = "center">
-    <%= will_paginate @stores, renderer: BootstrapPagination::Rails %>
+  <div class="col-md-4">
   </div>
-</div>
-<div class="col-md-2">
-</div>
+    <div class="col-md-4" >
+        <a class="btn btn-primary btn-block" href="owner/stores/new" role="button">新增商店</a>
+    </div>
+  </div>
+  <br></br>
+  <% end %>
+<div class="row">
+  <div class="col-md-2">
+  </div>
+
+  <div class="col-md-8">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td><div class = "item">商店編號</div></td>
+          <td><div class = "item">商店商標</div></td>
+          <td><div class = "item">商店名稱<div></td>
+          <% if !current_user.nil? && current_user.is_owner %>
+          <td colspan="2"><div class = "item">動作<div></td>
+          <% end %>
+        </tr>
+        <% @stores.reload %>
+        <% @stores.each do |store| %>
+          <tr>
+            <td><div class = "item"><%= store.id %></div></td>
+            <td><div class = "item"><%= image_tag(store.image.thumb.url, alt: store.name, class: "gravatar") %></div></td>
+            <%  if  !current_user.nil? &&( current_user.is_admin || current_user == store.owner) %>
+              <td><div class = "item"><%= link_to store.name, store_path(store.id) %></div></td>
+              <td><div class = "item"><%= link_to '編輯', edit_owner_store_path(store) %></div></td>
+              <td><div class = "item"><%= link_to '刪除', owner_store_path(store), method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
+            <% elsif !current_user.nil? && current_user.stores.include?(store) %>
+              <td><div class = "item"><%= store.name %></div></td>
+              <td><div class = "item"><%= link_to '檢視', store_path(store.id) %></div></td>
+              <td><div class = "item"><%= link_to '編輯', edit_owner_store_path(store) %></div></td>
+            <% elsif !current_user.nil? && current_user.is_owner %>
+              <td><div class = "item"><%= store.name %></div></td>
+              <td colspan="2"><div class = "item"><%= link_to '檢視', store_path(store.id) %></div></td>
+            <% else %>
+              <td><div class = "item"><%= link_to store.name, store_path(store.id) %></div></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class = "center">
+      <%= will_paginate @stores, renderer: BootstrapPagination::Rails %>
+    </div>
+    </div>
+  <div class="col-md-2">
+  </div>
 </div>

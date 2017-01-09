@@ -35,22 +35,24 @@ Rails.application.routes.draw do
 
   resources :stores, only: [:index, :show]
   get '/items', to: 'items#catalog'
-  get '/stores/:id/items', to: 'items#index'
+  get '/stores/:store_id/items', to: 'items#index'
   get '/items/:id', to: 'items#show'
 
   resources :tags, only: [:show, :index], param: :label
 
-  resources :events, except: [:new]
-  get '/events/new/:type', to: 'events#new'
+
+  resources :events, only: [:show]
 
   namespace :owner do
+    resources :events, except: [:new,:show]
+    get '/events/new/:type', to: 'events#new'
     resources :stores, except: [:index, :show] do
       resources :items, except: [:index, :show], shallow: true
     end
 
 
     get '/items', to: redirect('/items')
-    get '/stores/:id/items', to: redirect('/stores/%{id}/items')
+    get '/stores/:store_id/items', to: redirect('/stores/%{store_id}/items')
     get '/stores/:store_id/items/:item_id', to: 'items#show'
     post '/stores/:store_id/items/:item_id', to: 'items#update'
     get '/items/:id', to: redirect('/items/%{id}')

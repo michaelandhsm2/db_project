@@ -13,8 +13,8 @@
           <tr>
             <td><div class = "item"><%= order_item.item.name %></div></td>
             <td><div class = "item"><%= order_item.quantity %></div></td>
-            <td><div class = "item"><%= order_item.item.price %></div></td>
-            <td><div class = "item"><%= order_item.item.price * order_item.quantity %></div></td>
+            <td><div class = "item"><%= price_counter(order_item.item) %></div></td>
+            <td><div class = "item"><%= price_counter(order_item.item) * order_item.quantity %></div></td>
           </tr>
         <% end %>
       </tbody>

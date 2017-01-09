@@ -1,0 +1,39 @@
+<% provide(:title, "優惠活動") %>
+
+<div class="row">
+  <h1>優惠活動列表</h1>
+  <div class="col-md-3">
+  </div>
+<div class="col-md-6">
+    <a class="btn btn-primary" href="/owner/events/new/shipping" role="button">新增運費優惠</a>
+    <a class="btn btn-primary" href="/owner/events/new/season" role="button">新增限時全館優惠</a>
+    <a class="btn btn-primary" href="/owner/events/new/special" role="button">新增限時商品優惠</a>
+    <a class="btn btn-primary" href="/owner/events/new/coupon" role="button">新增購物金贈送活動</a>
+</div>
+</div>
+<br></br>
+<div class="row">
+<div class="col-md-2">
+</div>
+<div class="col-md-8">
+  <table class="table table-striped">
+    <tbody>
+      <% @events.reload %>
+      <% @events.each do |event| %>
+        <tr>
+          <td><div class = "item"><%= event.id %></div></td>
+          <td><div class = "item"><%= event.event_code_type %></div></td>
+          <td><div class = "item"><%= link_to event.name, event_path(event)  %></div></td>
+          <td><div class = "item"><%= link_to 'Edit', edit_owner_event_path(event) %></div></td>
+          <td><div class = "item"><%= link_to 'Destroy', owner_event_path(event), method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class = "center">
+    <%= will_paginate @events, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>
+<div class="col-md-2">
+</div>
+</div>

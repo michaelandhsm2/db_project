@@ -1,14 +1,17 @@
 $(document).on('ready page:load turbolinks:load', function ()  {
   $('#myTags').tagit();
 
-  $('#readOnlyTags').tagit({
+  $('.myForm').submit(function() {
+    $('option').removeAttr('disabled');
+  });
+
+  $('.readOnlyTags').tagit({
     readOnly: true,
     onTagClicked: function(evt, ui) {
       window.location.href = '/tags/'+ui.tagLabel;
       return false;
     }
   });
-
 
   $('#optgroup').multiSelect({
 
@@ -17,8 +20,8 @@ $(document).on('ready page:load turbolinks:load', function ()  {
     selectableOptgroup: true,
 
 
-    selectableHeader: "<div class='custom-header'>可選擇商品</div><input type='text' class='form-control' autocomplete='off' placeholder='Type to search'>",
-    selectionHeader: "<div class='custom-header'>已選擇商品</div><input type='text' class='form-control' autocomplete='off' placeholder='Type to search'>",
+    selectableHeader: "<div class='custom-header'>可選擇</div><input type='text' class='form-control' autocomplete='off' placeholder='Type to search'>",
+    selectionHeader: "<div class='custom-header'>已選擇</div><input type='text' class='form-control' autocomplete='off' placeholder='Type to search'>",
     afterInit: function(ms){
       var that = this,
           $selectableSearch = that.$selectableUl.prev(),
@@ -51,4 +54,5 @@ $(document).on('ready page:load turbolinks:load', function ()  {
       this.qs2.cache();
     }
   });
+
 });

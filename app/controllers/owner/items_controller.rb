@@ -1,6 +1,7 @@
 class Owner::ItemsController < ApplicationController
   before_filter :set_item, only: [:edit, :update, :destroy]
-  before_filter :set_store, only: [:new, :create, :edit, :update]
+  before_filter :set_store
+  before_filter :check_store_owner
 
   def new
     @item = Item.new
@@ -53,8 +54,6 @@ private
   def set_store
     if !params[:store_id].nil?
       @store = Store.find(params[:store_id])
-    elsif !params[:id].nil?
-      @store = Store.find(params[:id])
     else
       @store = @item.store
     end
@@ -68,3 +67,18 @@ private
       @item = Item.find(params[:id])
     end
   end
+
+    def check_store_owner
+      unless is_store_user?
+        flash[:danger] = "你非此商店之管理者"
+        redirect_back fallback_location: root_path
+      end
+    end
+
+    def is_store_user?
+      if (current_user.is_admin || (current_user.stores.include? @store) || current_user == @store.owner)
+        return true
+      else
+        return false
+      end
+    end

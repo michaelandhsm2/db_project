@@ -12,7 +12,7 @@
             <td><div class = "item"><%= order.created_at.localtime %></div></td>
             <td><div class = "item"><%= order.id %></div></td>
             <td><div class = "item"><%= order_status(order) %></div></td>
-            <td><div class = "item"><%= order.total_price %></div></td>
+            <td><div class = "item"><%= order.total_price + order.fee %></div></td>
           </tr>
         <% end %>
       </tbody>

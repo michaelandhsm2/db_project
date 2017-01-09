@@ -22,6 +22,10 @@
                 <li><%= link_to "會員訂單管理", admin_orders_path %></li>
                 <li class="divider"></li>
               <% end %>
+              <% if current_user.is_owner %>
+                <li><%= link_to "活動列表檢視", owner_events_path %></li>
+                <li class="divider"></li>
+              <% end %>
               <li>
                 <%= link_to "登出", logout_path, method: "delete" %>
               </li>

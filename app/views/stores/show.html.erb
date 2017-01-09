@@ -1,11 +1,28 @@
-<h1>Stores#show</h1>
-<p>Find me in app/views/stores/show.html.erb</p>
+<% provide(:title, @store.name) %>
+<h1><%=@store.name%></h1>
 
-<div class = "item"><%= @store.id %></div>
-<div class = "item"><%= @store.name %></div>
-<div class = "item"><%= @store.email %></div>
-<div class = "item"><%= @store.phone %></div>
-<div class = "item"><%= @store.description %></div>
-<div><%= image_tag(@store.image.url, alt: @store.name) %></div>
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-6">
+    <div><%= image_tag(@store.image.url, alt: @store.name) %></div>
+  </div>
+  <div class="col-md-4" >
+    <div><%= @store.description %></div>
+    <div class = "item">電子信箱：<%= @store.email %></div>
+    <div class = "item">聯絡方式：<%= @store.phone %></div>
+  </div>
+</div>
+<%= render 'items/list', items: @store.items.paginate(page: params[:page], :per_page => 5), text: @store.name+'的' %>
 
-<%= render 'items/list', items: @store.items.paginate(page: params[:page], :per_page => 5) %>
+
+
+<% if is_store_user? %>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <%= button_to "新增商品", new_owner_store_item_path(@store.id), :class => "btn btn-primary btn-block", :method => :get %>
+    </div>
+  </div>
+<% end %>

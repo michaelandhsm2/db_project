@@ -3,7 +3,7 @@ class Store < ApplicationRecord
   has_many :items, dependent: :destroy, inverse_of: :store
   has_many :events, dependent: :destroy, class_name: "Season", inverse_of: :store
   has_and_belongs_to_many :users, inverse_of: :stores
-  belongs_to :owner, class_name: "User", dependent: :destroy
+  belongs_to :owner, class_name: "User", dependent: :destroy, :foreign_key => 'owner_id', inverse_of: :owned_stores
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PHONE_REGEX = /0[0-9]{9}/

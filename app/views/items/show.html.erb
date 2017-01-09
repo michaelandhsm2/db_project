@@ -1,18 +1,20 @@
-<h1>Item#show</h1>
-<p>Find me in app/views/item/show.html.erb</p>
+<h1><%=@item.name%></h1>
 
-<div class = "item"><%= @item.id %></div>
-<div class = "item"><%= @item.name %> FROM <%=@item.store.name%></div>
-<div class = "item">$<%= @item.price %></div>
-<div class = "item">#:<%= @item.quantity %></div>
-<div class = "item"><%= @item.description %></div>
-<div><%= image_tag(@item.image.url, alt: @item.name) %></div>
-
-
-
-<div>
-  <%= render 'tags/list', tags: @item.tags%>
+<div class="row">
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-6">
+    <div><%= image_tag(@item.image.url, alt: @item.name) %></div>
+  </div>
+    <div class="col-md-4" >
+    <div class = "item"><%= @item.name %> FROM <%=@item.store.name%></div>
+    <div ><%= @item.description %></div>
+    <div class = "item">$<%= @item.price %></div>
+    <div class = "item">庫存數量:<%= @item.quantity %></div>
+    <div>
+      <%= render 'tags/list', tags: @item.tags.sort{|a,b| a.taggings_count <=> b.taggings_count}%>
+    </div>
+  </div>
 </div>
 
-
-<p>Find me in app/views/item/show.html.erb</p>
+<%= render 'items/list', items: @item.find_related_tags.paginate(page: params[:page], :per_page =>5), text: "相關"%>

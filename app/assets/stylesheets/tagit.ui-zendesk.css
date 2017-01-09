@@ -54,9 +54,6 @@ ul.tagit input[type="text"] {
     font-size: 1.1em;
 }
 
-#readOnlyTags{
-  border-style: hidden;
-}
 
 /* Forked from a jQuery UI theme, so that we don't require the jQuery UI CSS as a dependency. */
 .tagit-autocomplete.ui-autocomplete { position: absolute; cursor: default; }

@@ -165,3 +165,16 @@ div.hint {
   margin-right: auto;
   vertical-align: middle;
 }
+
+td.item ul.readOnlyTags{
+  height: 30px
+}
+
+
+ul.readOnlyTags{
+  border-style: hidden !important;
+    width: 250px;
+    .tagit-new{
+      display: none;
+    }
+}
