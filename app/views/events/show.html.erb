@@ -1,3 +1,5 @@
+<% provide(:title,params[:type].capitalize!) %>
+
 <% if params[:type] == "shipping" %>
  <%= render 'shipping', event_code: @event_code %>
 <% elsif params[:type] == "season" %>
