@@ -64,14 +64,6 @@ private
     end
   end
 
-  def is_store_user?
-    if (current_user.is_admin || (current_user.stores.include? @store) || current_user == @store.owner)
-      return true
-    else
-      return false
-    end
-  end
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def store_params
     params.require(:store).permit!

@@ -1,7 +1,7 @@
 $(document).on('ready page:load turbolinks:load', function ()  {
   $('#myTags').tagit();
 
-  $('#readOnlyTags').tagit({
+  $('.readOnlyTags').tagit({
     readOnly: true,
     onTagClicked: function(evt, ui) {
       window.location.href = '/tags/'+ui.tagLabel;

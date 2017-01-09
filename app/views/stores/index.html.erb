@@ -1,17 +1,17 @@
 <% provide(:title, "商店") %>
 
 
+<h1>商店列表</h1>
+<% if !current_user.nil? && current_user.is_owner %>
 <div class="row">
-  <h1>商店列表</h1>
   <div class="col-md-4">
   </div>
-  <% if !current_user.nil? && current_user.is_owner %>
     <div class="col-md-4" >
         <a class="btn btn-primary btn-block" href="owner/stores/new" role="button">新增商店</a>
     </div>
-    <% end %>
   </div>
   <br></br>
+  <% end %>
 <div class="row">
   <div class="col-md-2">
   </div>

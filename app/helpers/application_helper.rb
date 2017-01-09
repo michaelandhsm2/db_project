@@ -22,4 +22,12 @@ module ApplicationHelper
     end
   end
 
+    def is_store_user?
+      if (current_user.is_admin || (current_user.stores.include? @store) || current_user == @store.owner)
+        return true
+      else
+        return false
+      end
+    end
+
 end
