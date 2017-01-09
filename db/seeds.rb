@@ -28,7 +28,7 @@ r = Random.new
   user.email = Faker::Internet.unique.email
   user.name = Faker::GameOfThrones.unique.character
   user.is_owner = true
-  user.password = Faker::PhoneNumber.subscriber_number(1) + Faker::Bitcoin.address + 'a'
+  user.password = "password123"
   user.birthdate = Date.current
   user.cellphone = "09" + Faker::PhoneNumber.subscriber_number(4) + Faker::PhoneNumber.subscriber_number(4)
   user.address = Faker::GameOfThrones.city + Faker::Address.street_address + Faker::Address.secondary_address
@@ -54,7 +54,7 @@ end
 250.times do |n|
   item = Item.new
   item.name = Faker::Food.unique.ingredient
-  item.store = Store.find(r.rand(1..Stpre.count))
+  item.store = Store.find(r.rand(1..Store.count))
   item.quantity = r.rand(0..25)
   item.price = r.rand(10..1000)
   item.description = Faker::Hacker.say_something_smart
