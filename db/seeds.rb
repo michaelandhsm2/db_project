@@ -44,8 +44,8 @@ end
   store.phone = "0" + Faker::PhoneNumber.subscriber_number(4) + Faker::PhoneNumber.subscriber_number(4) + Faker::PhoneNumber.subscriber_number(1)
   store.description = Faker::Hacker.say_something_smart
   store.remote_image_url = Faker::Company.logo
-  store.owner = User.find(r.rand(0..User.count))
-  store.user_ids = (0..User.count).to_a.shuffle.take(r.rand(0..8))
+  store.owner = User.find(r.rand(1..User.count))
+  store.user_ids = (1..User.count).to_a.shuffle.take(r.rand(0..8))
   store.user_ids << store.owner.id
   store.user_ids.uniq!
   store.save!

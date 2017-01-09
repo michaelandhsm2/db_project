@@ -36,7 +36,7 @@
     <% user_options.sort! %>
   <% end%>
   <% selected_options = store.user_ids %>
-  <% selected_options = [store.owner.id] %>
+  <% selected_options << store.owner.id %>
   <% selected_options << current_user.id %>
   <% selected_options.uniq! %>
   <%= f.label :user_ids, "員工" %>
