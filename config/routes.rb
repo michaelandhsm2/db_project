@@ -58,10 +58,7 @@ Rails.application.routes.draw do
     get '/stores/:id', to: redirect('/stores/%{id}')
   end
 
-  #resources :items, only: [:index, :show]
-
   namespace :admin do
-    resources :tags
     resources :users, only: [:index, :show, :update]
     resources :orders, only: [:index]
   end
