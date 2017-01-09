@@ -1,0 +1,46 @@
+<% provide(:title, "訂單資料檢視") %>
+<h1>訂單資料檢視</h1>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <table class="table table-striped">
+      <tbody>
+        <td><div class = "item">商品名稱</div></td>
+        <td><div class = "item">數量</div></td>
+        <td><div class = "item">商品價格</div></td>
+        <td><div class = "item">商品小計</div></td>
+        <% @order_items.each do |order_item| %>
+          <tr>
+            <td><div class = "item"><%= order_item.item.name %></div></td>
+            <td><div class = "item"><%= order_item.quantity %></div></td>
+            <td><div class = "item"><%= order_item.item.price %></div></td>
+            <td><div class = "item"><%= order_item.item.price * order_item.quantity %></div></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="text-right">
+          <span style="font-size: 1.2em">商品合計: NT<span style="color: green"><%= number_to_currency @order.total_price %></span></span>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="text-right">
+          <span style="font-size: 1.2em">總價: NT<span style="color: green"><%= number_to_currency @order.total_price %></span></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-10">
+      <%= link_to "上一頁", user_orders_path(current_user), class: "btn btn-primary" %>
+  </div>
+</div>
