@@ -40,10 +40,12 @@ Rails.application.routes.draw do
 
   resources :tags, only: [:show, :index], param: :label
 
-  resources :events, except: [:new]
-  get '/events/new/:type', to: 'events#new'
+
+  resources :events, only: [:show]
 
   namespace :owner do
+    resources :events, except: [:new,:show]
+    get '/events/new/:type', to: 'events#new'
     resources :stores, except: [:index, :show] do
       resources :items, except: [:index, :show], shallow: true
     end
