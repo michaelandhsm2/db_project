@@ -22,7 +22,7 @@
   <% elsif params[:type] == "season" %>
 
     <%= f.label :store_id, "優惠商家" %>
-    <%= f.select(:store_id,  Store.all.collect {|p| [ p.name, p.id ] }, {prompt: '----Select Store----'}) %>
+    <%= f.select(:store_id,  current_user.stores.collect {|p| [ p.name, p.id ] }, {prompt: '----Select Store----'}) %>
 
     <%= f.label :discount, "全館折扣 (？％ off)" %>
     <%= f.number_field :discount, class: 'form-control' %>
@@ -38,7 +38,7 @@
   <% elsif params[:type] == "special" %>
 
     <% item_options = []%>
-    <% Store.all.each do |s|%>
+    <% current_user.stores.each do |s|%>
       <% item_options << [s.name, s.items.collect{|p| [p.name, p.id]}] %>
     <% end%>
 
@@ -59,12 +59,29 @@
   <% else %>
 
     <% item_options = []%>
-    <% Store.all.each do |s|%>
+    <% current_user.stores.each do |s|%>
       <% item_options << [s.name, s.items.collect{|p| [p.name, p.id]}] %>
     <% end%>
 
+    <% stores = event_code.items.collect{|p| p.store}.uniq!%>
+    <% if !stores.nil? %>
+      <% stores = stores - current_user.stores %>
+      <% disabled_options = []%>
+      <% stores.each do |s|%>
+        <% list = [] %>
+        <% event_code.item_ids.each do |id| %>
+          <% if Item.find(id).store == s %>
+            <% list << [Item.find(id).name, Item.find(id).id] %>
+            <% disabled_options << Item.find(id).id %>
+            
+          <% end %>
+        <% end %>
+        <% item_options << [s.name, list] %>
+      <% end %>
+    <% end %>
+
     <%= f.label :item_id, "優惠商品" %>
-    <%= f.select(:item_ids, grouped_options_for_select(item_options, event_code.item_ids), {}, :multiple => true, id: 'optgroup') %>
+    <%= f.select(:item_ids, grouped_options_for_select(item_options, selected: event_code.item_ids, disabled: disabled_options), {}, :multiple => true, id: 'optgroup') %>
 
     <%= f.label :minimum_spending, "優惠適用消費底限" %>
     <%= f.number_field :minimum_spending, class: 'form-control' %>

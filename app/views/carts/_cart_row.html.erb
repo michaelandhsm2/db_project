@@ -6,11 +6,12 @@
 
     <%= form_for order_item, remote: true do |f| %>
       <div class="col-md-2">
-        <h4>單價: NT<span style="color: green"><%= number_to_currency order_item.item.price %></span></h4>
+        <h4>  單價: NT<% if price_counter(order_item.item) == order_item.item.price %><span style="color: green"><%else%><span style="color: red"><%end%> <%= number_to_currency price_counter(order_item.item) %></span></h4>
       </div>
 
       <div class="col-md-1">
-        <%= f.select :quantity, options_for_select(1..20, order_item.quantity.to_i), {}, :onchange => "$(this.form).submit();", class: "form-control" %>
+        <% max = item.quantity < 20 ? item.quantity : 20 %>
+        <%= f.select :quantity, options_for_select(1..max, order_item.quantity.to_i), {}, :onchange => "$(this.form).submit();", class: "form-control" %>
         <%= f.hidden_field :item_id, value: item.id %>
       </div>
 
@@ -22,7 +23,7 @@
       </div>
 
       <div class="col-md-3">
-        <h4 class="text-right">商品小計: NT<span style="color: green"><%= number_to_currency order_item.item.price * order_item.quantity %></span></h4>
+        <h4 class="text-right">商品小計: NT<% if price_counter(order_item.item) == order_item.item.price %><span style="color: green"><%else%><span style="color: red"><%end%><%= number_to_currency price_counter(order_item.item) * order_item.quantity %></span></h4>
       </div>
     <% end %>
   </div>

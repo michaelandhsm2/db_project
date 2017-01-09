@@ -23,12 +23,15 @@
           <% item_tags = item.tags.sort{|a,b| a.taggings_count <=> b.taggings_count} %>
           <% num = (item.tags.count < 3) ? item.tags.count : 3 %>
           <td class = "list"><%= render 'tags/list', tags: item_tags.first(num)%></td>
+          <td>
+            <div class = "item">
+              單價: NT<% if price_counter(item) == item.price %><span style="color: green"><%= number_to_currency item.price %><%else%><span style="color: red"><%= number_to_currency price_counter(item) %><%end%></span></h4>
+            </div>
+          </td>
           <%  if  !current_user.nil? &&( current_user.is_admin || current_user == store.owner || current_user.stores.include?(store)) %>
-            <td><div class = "item">單價: NT<span style="color: green"><%= number_to_currency item.price %></span></h4></div></td>
             <td><div class = "item"><%= link_to '編輯', edit_owner_item_path(item) %></div></td>
             <td><div class = "item"><%= link_to '刪除', owner_item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
           <% else %>
-            <td><div class = "item">單價: NT<span style="color: green"><%= number_to_currency item.price %></span></h4></div></td>
             <td colspan = '2'><div>
             <%= form_for @order_item, remote: true do |f| %>
               <div class="input-group">

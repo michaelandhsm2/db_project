@@ -1,4 +1,5 @@
 class Owner::EventsController < ApplicationController
+  before_action :check_owner
 
 
   def new
@@ -97,5 +98,14 @@ private
       @event_code = Special.find(id)
     else
       @event_code = Coupon.find(id)
+    end
+  end
+
+
+
+  def check_owner
+    unless current_user.is_owner
+      flash[:danger] = "你的身分並非商店管理者"
+      redirect_back fallback_location: root_path
     end
   end

@@ -1,6 +1,10 @@
 $(document).on('ready page:load turbolinks:load', function ()  {
   $('#myTags').tagit();
 
+  $('.myForm').submit(function() {
+    $('option').removeAttr('disabled');
+  });
+
   $('.readOnlyTags').tagit({
     readOnly: true,
     onTagClicked: function(evt, ui) {
@@ -50,4 +54,5 @@ $(document).on('ready page:load turbolinks:load', function ()  {
       this.qs2.cache();
     }
   });
+
 });
