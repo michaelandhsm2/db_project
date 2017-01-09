@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
     def is_admin?
       unless current_user.is_admin
         flash[:danger] = "你的身分並非管理者"
-        redirect_to root_url
+        redirect_back fallback_location: root_path
       end
     end
 

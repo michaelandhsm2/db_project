@@ -9,7 +9,6 @@ $(document).on('ready page:load turbolinks:load', function ()  {
     }
   });
 
-
   $('#optgroup').multiSelect({
 
     selectableFooter: "<div class='custom-header'> </div>",
@@ -17,8 +16,8 @@ $(document).on('ready page:load turbolinks:load', function ()  {
     selectableOptgroup: true,
 
 
-    selectableHeader: "<div class='custom-header'>可選擇商品</div><input type='text' class='form-control' autocomplete='off' placeholder='Type to search'>",
-    selectionHeader: "<div class='custom-header'>已選擇商品</div><input type='text' class='form-control' autocomplete='off' placeholder='Type to search'>",
+    selectableHeader: "<div class='custom-header'>可選擇</div><input type='text' class='form-control' autocomplete='off' placeholder='Type to search'>",
+    selectionHeader: "<div class='custom-header'>已選擇</div><input type='text' class='form-control' autocomplete='off' placeholder='Type to search'>",
     afterInit: function(ms){
       var that = this,
           $selectableSearch = that.$selectableUl.prev(),

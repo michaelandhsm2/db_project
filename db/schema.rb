@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 20170108050038) do
     t.datetime "updated_at",  null: false
     t.text     "description"
     t.string   "image"
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_stores_on_user_id"
+    t.integer  "owner_id"
+    t.index ["owner_id"], name: "index_stores_on_owner_id"
   end
 
   create_table "stores_users", id: false, force: :cascade do |t|

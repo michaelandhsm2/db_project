@@ -19,7 +19,7 @@ user.gender = "male"
 user.national_id = "L1000000000"
 user.save!
 
-tags = ["冷凍食品","海外配送","零食","限時特價","獨家商品","家傳配方","義式","含蛋料理","韓式","美式","飯店主廚推薦","日式","中式","素食可","蛋奶素","老少咸宜","須冷藏","須冷凍","海鮮","肉品","食材","可微波","焗烤"]
+tags = ["冷凍食品","海外配送","異國風味","全台獨售","安心食材","優惠商品","調味醬料","糕點","特色料理","南北雜貨","早餐好朋友","輕鬆煮","養生","暢銷排行","今日即時榜","年菜專區","零食","限時特價","獨家商品","家傳配方","義式","含蛋料理","韓式","美式","飯店主廚推薦","日式","中式","素食可","蛋奶素","老少咸宜","須冷藏","須冷凍","海鮮","肉品","食材","可微波","焗烤"]
 
 r = Random.new
 
@@ -44,13 +44,17 @@ end
   store.phone = "0" + Faker::PhoneNumber.subscriber_number(4) + Faker::PhoneNumber.subscriber_number(4) + Faker::PhoneNumber.subscriber_number(1)
   store.description = Faker::Hacker.say_something_smart
   store.remote_image_url = Faker::Company.logo
+  store.owner = User.find(r.rand(0..User.count))
+  store.user_ids = (0..User.count).to_a.shuffle.take(r.rand(0..8))
+  store.user_ids << store.owner.id
+  store.user_ids.uniq!
   store.save!
 end
 
 250.times do |n|
   item = Item.new
   item.name = Faker::Food.unique.ingredient
-  item.store = Store.find(r.rand(1..25))
+  item.store = Store.find(r.rand(1..Stpre.count))
   item.quantity = r.rand(0..25)
   item.price = r.rand(10..1000)
   item.description = Faker::Hacker.say_something_smart
