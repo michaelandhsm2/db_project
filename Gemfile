@@ -30,6 +30,12 @@ gem 'jquery-turbolinks'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'acts-as-taggable-on', '~> 4.0'
 
+# AWS S3 & EVN stuff
+gem 'aws-sdk', '~> 2'
+gem "figaro"
+gem 'rack-cors', :require => 'rack/cors'
+gem "fog"
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
