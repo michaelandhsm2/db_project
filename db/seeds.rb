@@ -51,7 +51,7 @@ end
   store.save!
 end
 
-20.times do |n|
+5.times do |n|
   item = Item.new
   item.name = Faker::Food.unique.ingredient
   item.store = Store.find(r.rand(1..Store.count))
