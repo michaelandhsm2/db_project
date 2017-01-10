@@ -1,7 +1,4 @@
-<h1>Season#show</h1>
 
-<div class = "item"><%= event_code.event.id %></div>
-<div class = "item"><%= event_code.event.name %></div>
 <div class = "item"><%= event_code.start_date.to_formatted_s(:long) %> to <%=event_code.end_date.to_formatted_s(:long)%> </div>
 <div class = "item">For any purchase from <%= link_to event_code.store.name, store_path(event_code.store_id) %>, <%= event_code.discount%>% off!</div>
 <div class = "item"><%= event_code.event.description %></div>

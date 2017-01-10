@@ -1,14 +1,33 @@
-<% provide(:title,params[:type].capitalize!) %>
+<% provide(:title,params[:type].capitalize + ' - ' + @event_code.event.name) %>
 
-<% if params[:type] == "shipping" %>
- <%= render 'shipping', event_code: @event_code %>
-<% elsif params[:type] == "season" %>
- <%= render 'season', event_code: @event_code %>
-<% elsif params[:type] == "special"  %>
- <%= render 'special', event_code: @event_code %>
-<% else %>
- <%= render 'coupon', event_code: @event_code %>
+<h1><%=params[:type].capitalize + ' - ' + @event_code.event.name%></h1>
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+    <% if params[:type] == "shipping" %>
+     <%= render 'shipping', event_code: @event_code %>
+    <% elsif params[:type] == "season" %>
+     <%= render 'season', event_code: @event_code %>
+    <% elsif params[:type] == "special"  %>
+     <%= render 'special', event_code: @event_code %>
+    <% else %>
+     <%= render 'coupon', event_code: @event_code %>
+    <% end %>
+  </div>
+</div>
+
+<% if params[:type] == "special" || params[:type] == "coupon"%>
+  <%= render 'items/list', items: @event_code.items.paginate(page: params[:page], :per_page => 5), text: "優惠中的"%>
 <% end %>
+</br>
 
 
-<%= link_to "回到列表", owner_events_path%>
+  <div class="row">
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-3">
+      <a class="btn btn-primary" href= <%= edit_owner_event_path(@event_code.event) %> role="button">編輯活動</a>
+      <a class="btn btn-primary" href= <%= owner_events_url %> role="button">回到列表</a>
+    </div>
+  </div>

@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    params[:type] = @event.event_code_type.downcase!
+    params[:type] = @event.event_code_type.downcase
     find_event(params[:type], @event.event_code_id)
   end
 

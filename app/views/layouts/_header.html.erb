@@ -8,7 +8,9 @@
         <li><%= link_to "商品列表", items_path %></li>
         <li><%= link_to "商店", stores_path %></li>
         <% if logged_in? %>
-          <li class="cart-text"><%= render 'layouts/cart_text' %></li>
+          <% if !current_user.is_admin %>
+            <li class="cart-text"><%= render 'layouts/cart_text' %></li>
+          <% end %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Hello, <%= current_user.name %> <b class="caret"></b>

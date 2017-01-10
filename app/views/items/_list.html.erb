@@ -20,7 +20,7 @@
         <tr>
           <td><div class = "item"><%= image_tag(item.image.thumb.url, alt: item.name, class: "gravatar") %></div></td>
           <td><div class = "item"><%= link_to item.name, owner_item_path(item) %></div></td>
-          <% item_tags = item.tags.sort{|a,b| a.taggings_count <=> b.taggings_count} %>
+          <% item_tags = item.tags.sort{|a,b| a.taggings_count <=> b.taggings_count}.reverse! %>
           <% num = (item.tags.count < 3) ? item.tags.count : 3 %>
           <td class = "list"><%= render 'tags/list', tags: item_tags.first(num)%></td>
           <td>

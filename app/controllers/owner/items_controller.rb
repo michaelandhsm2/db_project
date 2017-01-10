@@ -12,7 +12,8 @@ class Owner::ItemsController < ApplicationController
     @item.store = @store
     if @item.save
       flash[:success] = "商品成功建立了！"
-      if(!@item.image.nil?)
+      if(@item.image.url.nil?)
+        r = Random.new
         @item.image = Rails.root.join("app/assets/images/rnd/food/"+r.rand(1..40).to_s+".jpg").open
         @item.save!
       end
