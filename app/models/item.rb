@@ -7,15 +7,15 @@ class Item < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-=begin
-  validates :name         presence: true, uniqueness: true
 
-  validates :quantity      presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :name,        presence: true, uniqueness: true
 
-  validates :price         presence: true, numericality: { greater_than: 0 }
+  validates :quantity,      presence: true, numericality: { greater_than_or_equal_to: 0 }
 
-  validates :store         presence: true
-=end
+  validates :price,         presence: true, numericality: { greater_than: 0 }
+
+  validates :store_id,         presence: true
+
   validates_processing_of :image
 
   validate :image_size_validation
@@ -26,5 +26,5 @@ end
 private
 
   def image_size_validation
-    errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
+    errors[:image] << "should be less than 2MB" if image.size > 2.megabytes
   end

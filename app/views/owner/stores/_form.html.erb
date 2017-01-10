@@ -39,8 +39,12 @@
   <% selected_options << store.owner_id %>
   <% selected_options << current_user.id %>
   <% selected_options.uniq! %>
+  <% disabled_options = [] %>
+  <% disabled_options << store.owner_id %>
+  <% disabled_options << current_user.id %>
+  <% disabled_options.uniq! %>
   <%= f.label :user_ids, "員工" %>
-  <%= f.select(:user_ids, options_for_select(user_options, selected: selected_options, disabled: store.owner_id), {}, :multiple => true, id: 'optgroup') %>
+  <%= f.select(:user_ids, options_for_select(user_options, selected: selected_options, disabled: disabled_options), {}, :multiple => true, id: 'optgroup') %>
 
   <%= f.submit "確認送出", class: "btn btn-primary" %>
 <% end %>
