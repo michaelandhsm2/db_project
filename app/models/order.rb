@@ -29,7 +29,7 @@ class Order < ApplicationRecord
         cost = 0
       else
         col = Shipping.all.collect{|e| [e.minimum_spending, e.discount]}
-        col.sort!{|a,b| a.minimum_spending <=> b.minimum_spending}
+        col.sort!{|a,b| a[0] <=> b[0] }
         col.each do |min, dis|
           if(total_price > min)
             cost = (cost * (100-dis))/100

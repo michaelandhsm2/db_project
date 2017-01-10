@@ -3,13 +3,17 @@ class OrdersController < ApplicationController
 
   def index
     @orders = current_user.orders.paginate(page: params[:page], :per_page => 10)
+    store_current_location
+  end
+
+  def back
+    redirect_back_or root_path
   end
 
   def show
     @order = current_user.orders.find(params[:id])
     @order_items = @order.order_items
   end
-
   private
 
     def logged_in_user

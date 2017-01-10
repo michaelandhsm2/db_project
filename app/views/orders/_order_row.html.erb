@@ -4,26 +4,50 @@
       <tbody>
         <td><div class = "item">訂購日期</div></td>
         <td><div class = "item">訂單編號</div></td>
+        <% if current_user.is_owner %>
+          <td><div class = "item">會員編號</div></td>
+        <% end %>
         <td><div class = "item">處理進度</div></td>
         <td><div class = "item">訂單金額</div></td>
         <td><div class = "item">訂單地址</div></td>
         <td><div class = "item">訂單資料檢視</div></td>
-        <% @orders.reload %>
-        <% @orders.each do |order| %>
+        <% orders.each do |order| %>
           <tr>
             <td><div class = "item"><%= order.created_at.localtime %></div></td>
             <td><div class = "item"><%= order.id %></div></td>
-            <td><div class = "item"><%= order_status(order) %></div></td>
+            <% if current_user.is_owner %>
+              <td><div class = "item"><%= order.user_id %></div></td>
+              <% stores = order.order_items.collect{|x| Item.find(x.item_id).store}.uniq  %>
+              <% if (current_user.stores - stores).count  != current_user.stores.count && order.user != current_user && order.status != nil  && order.status != "complete"    %>
+                <td><div class = "item">
+                  <%= form_for order, url: owner_order_path(order), remote: true do |f| %>
+                    <%= f.select :status, [ ["訂單已送出", "received"], ["出貨準備中", "processing"], ["運送中", "shipping"], ["完成", "complete"]], {},
+                                 :onchange => "$(this.form).submit();", class: 'form-control' %>
+                    <%= f.hidden_field :order_id, value: order.id %>
+                  <% end %>
+                </div></td>
+              <% else %>
+                <td><div class = "item"><%= order_status(order) %></div></td>
+              <% end %>
+            <% else %>
+              <td><div class = "item"><%= order_status(order) %></div></td>
+            <% end %>
             <td><div class = "item"><%= order.total_price %></div></td>
             <td><div class = "item"><%= order.user.address %></div></td>
-            <td><div class = "item"><%= link_to "檢視", user_order_path(current_user.id, order.id) %></div></td>
+            <% if current_user.is_admin %>
+              <td><div class = "item"><%= link_to "檢視", admin_order_path(order.id) %></div></td>
+            <% elsif current_user.is_owner %>
+              <td><div class = "item"><%= link_to "檢視", owner_order_path(order.id) %></div></td>
+            <% else %>
+              <td><div class = "item"><%= link_to "檢視", user_order_path(current_user.id, order.id) %></div></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
     </table>
 
     <div class = "center">
-      <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+      <%= will_paginate orders, renderer: BootstrapPagination::Rails %>
     </div>
   </div>
 </div>

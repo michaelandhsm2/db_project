@@ -8,7 +8,7 @@
         <h2>目前尚無任何消費紀錄, 立即 <%= link_to "前往選購", items_path %> </h2>
       </p>
     <% else %>
-      <%= render 'orders/order_row' %>
+      <%= render 'order_row', orders: @orders %>
     <% end %>
   </div>
 </div>

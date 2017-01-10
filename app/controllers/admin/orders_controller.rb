@@ -3,6 +3,7 @@ class Admin::OrdersController < ApplicationController
 
   def index
     @orders = Order.paginate(page: params[:page], :per_page => 10)
+    store_current_location
   end
 
   def show
@@ -10,21 +11,12 @@ class Admin::OrdersController < ApplicationController
     @order_items = @order.order_items
   end
 
-  def update
-    @order = Order.find(params[:id])
-    @order.update_attributes(order_params)
-  end
-
   private
 
     def is_admin?
       unless current_user.is_admin
         flash[:danger] =  "你的身分並非管理者"
-        redirect_to root_url
+        redirect_back_or root_url
       end
-    end
-
-    def order_params
-      params.require(:order).permit(:status)
     end
 end

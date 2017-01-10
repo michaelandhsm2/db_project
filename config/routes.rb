@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index]
   end
 
-  #resource :orders, only: [:show]
+  resources :orders, only: [:index, :show, :update ]
 
   resource :cart, only: [:show]
   get '/cart_confirmation', to: 'carts#confirm'
@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   resources :tags, only: [:show, :index], param: :label
 
+  get '/back', to: 'orders#back'
 
   resources :events, only: [:show]
 
@@ -49,6 +50,8 @@ Rails.application.routes.draw do
     resources :stores, except: [:index, :show] do
       resources :items, except: [:index, :show], shallow: true
     end
+
+    resources :orders, only: [:index, :show, :update ]
 
 
     get '/items', to: redirect('/items')
@@ -62,7 +65,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :show, :update]
-    resources :orders, only: [:index]
+    resources :orders, only: [:index, :show]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

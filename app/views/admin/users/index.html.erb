@@ -17,11 +17,20 @@
             <td><div class = "item"><%= user.id %></div></td>
             <td><div class = "item"><%= user.name %></div></td>
             <td><div class = "item"><%= user.email %></div></td>
-            <td><div class = "item"><%= user.is_owner %></div></td>
             <td><div class = "item">
               <%= form_for user, url: admin_user_path(user), remote: true do |f| %>
-              <%= f.select :is_admin, [["是", "true"], ["否", "false"]], {}, :onchange => "$(this.form).submit();", class: 'form-control' %>
-              <%= f.hidden_field :user_id, value: user.id %>
+                <%= f.select :is_owner, [["是", "true"],["否", "false"]], {}, :onchange => "$(this.form).submit();", class: 'form-control' %>
+                <%= f.hidden_field :user_id, value: user.id %>
+              <% end %>
+            </div></td>
+            <td><div class = "item">
+              <% if user == current_user %>
+                <%= user.is_admin ? "是" : "否" %>
+              <% else %>
+                <%= form_for user, url: admin_user_path(user), remote: true do |f| %>
+                <%= f.select :is_admin, [["是", "true"], ["否", "false"]], {}, :onchange => "$(this.form).submit();", class: 'form-control' %>
+                <%= f.hidden_field :user_id, value: user.id %>
+                <% end %>
               <% end %>
             </div></td>
             <td><div class = "item"><%= link_to "檢視", admin_user_path(user.id) %></div></td>
