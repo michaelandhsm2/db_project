@@ -23,7 +23,7 @@ tags = ["冷凍食品","海外配送","異國風味","全台獨售","安心食�
 
 r = Random.new
 
-50.times do |n|
+3.times do |n|
   user = User.new
   user.email = Faker::Internet.unique.email
   user.name = Faker::GameOfThrones.unique.character
@@ -36,14 +36,14 @@ r = Random.new
   user.save!
 end
 
-25.times do |n|
+5.times do |n|
   store = Store.new
   store.name  = Faker::Company.unique.name
   store.address = Faker::GameOfThrones.city + Faker::Address.street_address + Faker::Address.secondary_address
   store.email = Faker::Internet.email
   store.phone = "0" + Faker::PhoneNumber.subscriber_number(4) + Faker::PhoneNumber.subscriber_number(4) + Faker::PhoneNumber.subscriber_number(1)
   store.description = Faker::Hacker.say_something_smart
-  store.remote_image_url = Faker::Company.logo
+  store.image = Rails.root.join("app/assets/images/rnd/logo/"+r.rand(1..40).to_s+".gif").open
   store.owner = User.find(r.rand(1..User.count))
   store.user_ids = (1..User.count).to_a.shuffle.take(r.rand(0..8))
   store.user_ids << store.owner.id
@@ -51,7 +51,7 @@ end
   store.save!
 end
 
-250.times do |n|
+20.times do |n|
   item = Item.new
   item.name = Faker::Food.unique.ingredient
   item.store = Store.find(r.rand(1..Store.count))

@@ -16,7 +16,7 @@
   <%= f.label :description, "詳細介紹 (可不填)" %>
   <%= f.text_area :description, size: "60x8", class: 'form-control' %>
 
-  <%= f.label :image, "店舖照片 (可不填)"  %>
+  <%= f.label :image, "店舖照片"  %>
   <%= f.file_field :image, class: 'form-control'  %>
   <%= f.hidden_field :image_cache %>
   <% if f.object.image? %>

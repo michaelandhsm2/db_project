@@ -18,6 +18,8 @@ class Item < ApplicationRecord
 
   validates_processing_of :image
 
+  validates_presence_of :image
+
   validate :image_size_validation
 
   validates_associated :store
@@ -26,5 +28,5 @@ end
 private
 
   def image_size_validation
-    errors[:image] << "should be less than 2MB" if image.size > 2.megabytes
+    errors[:image] << "should be less than 1MB." if image.size > 1.megabytes
   end

@@ -12,10 +12,6 @@ class Owner::StoresController < ApplicationController
     @store.owner = current_user
     if @store.save
       flash[:success] = "商店成功建立了！"
-      if(@store.image.url.nil?)
-        @store.remote_image_url = "https://place-hold.it/300x240/aaa.png"
-        @store.save!
-      end
       redirect_to @store
     else
       render 'new'
