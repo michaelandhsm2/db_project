@@ -43,7 +43,13 @@ end
 private
   # Use callbacks to share common setup or constraints between actions.
   def set_store
-    @store = Store.find(params[:id])
+    if !params[:store_id].nil?
+      @store = Store.find(params[:store_id])
+    elsif !params[:id].nil?
+      @store = Store.find(params[:id])
+    else
+      @store = @item.store
+    end
   end
 
   def check_owner
