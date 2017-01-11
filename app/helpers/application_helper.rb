@@ -39,4 +39,8 @@ module ApplicationHelper
       end
     end
 
+  def store_out_of_stock items
+    return items.each_with_index.select { |x,i| x.quantity > 0 || current_user.stores.include?(x.store) }
+  end
+
 end

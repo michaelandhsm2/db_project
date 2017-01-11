@@ -13,12 +13,20 @@ class CartsController < ApplicationController
     @order = current_order
     @order.status = "received"
     @order.save
+    order_from_items
     session.delete(:order_id)
     flash[:success] = "訂單成功送出"
     redirect_to root_url
   end
 
   private
+    def order_from_items
+      @order.order_items.each do |order_item|
+        item = Item.find(order_item.item_id)
+        item.quantity -= order_item.quantity
+        item.save!
+      end
+    end
 
     def logged_in_user
       unless logged_in?

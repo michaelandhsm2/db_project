@@ -13,7 +13,7 @@
     <div class = "item">聯絡方式：<%= @store.phone %></div>
   </div>
 </div>
-<%= render 'items/list', items: @store.items.paginate(page: params[:page], :per_page => 5), text: @store.name+'的' %>
+<%= render 'items/list', items: @items, text: @store.name+'的' %>
 
 
 

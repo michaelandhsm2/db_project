@@ -2,7 +2,7 @@ class OrderItem < ApplicationRecord
   belongs_to :order
   belongs_to :item
 
-  validate :order_repeat
+  validate :order_repeat, :on => :create
 
   validates :order,     presence: true
   validates :item,      presence: true
@@ -13,6 +13,7 @@ end
 private
 
 def order_repeat
+  
   if order.items.include? item
     errors.add(:item, "can not be in the same order twice.")
   end

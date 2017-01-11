@@ -15,7 +15,9 @@
         <td colspan="2"><div class = "item">動作<div></td>
       </tr>
       <% items.reload %>
-      <% items.each do |item| %>
+      <% items_each = store_out_of_stock(items) %>
+      <% items_each.each do |item| %>
+        <% item = Item.find(item[0]) %>
         <% store = item.store%>
         <tr>
           <td><div class = "item"><%= image_tag(item.image.thumb.url, alt: item.name, class: "gravatar") %></div></td>
