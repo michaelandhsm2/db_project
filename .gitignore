@@ -25,5 +25,3 @@
 
 # Ignore public upload assets
 /public/uploads
-
-/Gemfile.lock
