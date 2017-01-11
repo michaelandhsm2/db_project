@@ -1,5 +1,8 @@
 <% if @order.errors.any? || @order_item.errors.any? %>
-  alert("Not valid.")
+  <% temp = [] %>
+  <% temp << @order.errors.full_messages %>
+  <% temp << @order_item.errors.full_messages %>
+  alert( '<%= temp.join('   ') %>')
 <% else %>
   $(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
 <% end %>

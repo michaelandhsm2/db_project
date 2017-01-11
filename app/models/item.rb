@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   belongs_to :store, inverse_of: :items
   has_and_belongs_to_many :specials, inverse_of: :items
   has_and_belongs_to_many :coupons, inverse_of: :items
+  has_many :orders, through: :order_items
 
   acts_as_taggable
 

@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user, inverse_of: :orders
   has_many :order_items
+  has_many :items, through: :order_items
 
   before_save :update_total_price, :update_fee
 
