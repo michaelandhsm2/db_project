@@ -9,7 +9,7 @@
 user = User.new
 user.email = "admin@gmail.com"
 user.name = "Admin"
-user.password = "admin123"
+user.password = "password123"
 user.is_admin = true
 user.is_owner = true
 user.birthdate = Date.current

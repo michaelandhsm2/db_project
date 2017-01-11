@@ -12,6 +12,7 @@ class CartsController < ApplicationController
   def submit
     @order = current_order
     @order.status = "received"
+    @order.date = DateTime.current
     @order.save
     order_from_items
     session.delete(:order_id)

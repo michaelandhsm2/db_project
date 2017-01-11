@@ -13,7 +13,7 @@
         <td><div class = "item">訂單資料檢視</div></td>
         <% orders.each do |order| %>
           <tr>
-            <td><div class = "item"><%= order.created_at.localtime %></div></td>
+            <td><div class = "item"><%= order.date.nil? ? DateTime.current.localtime : order.date.localtime  %></div></td>
             <td><div class = "item"><%= order.id %></div></td>
             <% if current_user.is_owner %>
               <td><div class = "item"><%= order.user_id %></div></td>

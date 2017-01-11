@@ -20,7 +20,7 @@
       <% @order_items.each do |order_item| %>
         <%= render 'carts/cart_row', item: order_item.item, order_item: order_item, show_total: true %>
       <% end %>
-      <%= render 'carts/total_price_row' %>
+      <%= render 'carts/total_price_row', this_order: current_order %>
       <%= render 'carts/cart_button_row' %>
     <% end %>
   </div>

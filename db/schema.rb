@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109230244) do
+ActiveRecord::Schema.define(version: 20170111023637) do
 
   create_table "coupons", force: :cascade do |t|
     t.integer  "minimum_spending"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170109230244) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "fee"
+    t.datetime "date"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

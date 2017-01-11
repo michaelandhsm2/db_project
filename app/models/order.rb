@@ -15,32 +15,38 @@ class Order < ApplicationRecord
     shipping_fees(order_items.collect { |tuple| tuple.quantity }.sum)
   end
 
+  def fee
+    cost = shipping_fee
+    update_total_price
+    if cost.nil?
+      cost = 0
+    else
+      col = Shipping.all.collect{|e| [e.minimum_spending, e.discount]}
+      col.sort!{|a,b| a[0] <=> b[0] }.reverse!
+      col.each do |min, dis|
+        if(total_price > min)
+          cost = (cost * (100-dis))/100
+          break
+        end
+      end
+    end
+    return cost
+  end
+
+
+
   private
     def update_total_price
       self.total_price = total_price
     end
 
     def shipping_fees quantity
-      25 * (quantity ** 0.5)
+      (25 * (quantity ** 0.5)).to_i
     end
 
     def update_fee
-      cost = shipping_fee
-      if cost.nil?
-        cost = 0
-      else
-        col = Shipping.all.collect{|e| [e.minimum_spending, e.discount]}
-        col.sort!{|a,b| a[0] <=> b[0] }
-        col.each do |min, dis|
-          if(total_price > min)
-            cost = (cost * (100-dis))/100
-            break
-          end
-        end
-      end
-      self.fee = cost
+      self.fee = fee
     end
-
 
 
       def price_counter item
