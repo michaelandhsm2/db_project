@@ -1,4 +1,4 @@
-<%= form_for [:owner, store] do |f| %>
+<%= form_for [:owner, store], html: { class: "myForm" } do |f| %>
   <%= render 'shared/error_messages', item: store %>
 
   <%= f.label :name, "店名" %>
