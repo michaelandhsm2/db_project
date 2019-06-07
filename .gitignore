@@ -25,3 +25,5 @@
 
 # Ignore public upload assets
 /public/uploads
+
+/vendor/bundle
